@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="page-title">Chi Tiết Dịch Vụ | ASIAN JSC</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <main class="container py-5 my-5">
+        <a href="services.html" class="btn btn-outline-secondary mb-4">
+            <i class="fa-solid fa-arrow-left me-2"></i>Quay lại Lĩnh Vực Hoạt Động
+        </a>
+        
+        <div class="row g-4" id="service-content">
+            <div class="col-lg-7">
+                <h1 class="fw-bold text-primary mb-3" id="service-title">Tên Dịch Vụ</h1>
+                <p class="lead fw-semibold" id="service-subtitle">Mô tả tóm tắt dịch vụ</p>
+                <hr>
+                <p id="service-description">Nội dung thông tin chi tiết dịch vụ...</p>
+                
+                <h4 class="fw-bold mt-4">Hạng Mục Kỹ Thuật Chính:</h4>
+                <ul id="service-items" class="lh-lg">
+                    <!-- Danh sách hạng mục đổ tự động bằng JS -->
+                </ul>
+            </div>
+            
+            <div class="col-lg-5">
+                <img id="service-image" src="" class="img-fluid rounded shadow w-100" alt="Hình ảnh dịch vụ">
+            </div>
+        </div>
+    </main>
+
+    <script>
+    // 1. Khai báo kho dữ liệu riêng biệt cho từng mục
+    const servicesData = {
+        "dien": {
+            title: "1. Hệ Thống Điện Công Nghiệp",
+            subtitle: "Giải pháp hạ tầng phân phối điện năng toàn diện cho nhà máy & khu công nghiệp.",
+            description: "ASIAN JSC cung cấp giải pháp trọn gói từ tư vấn thiết kế, cung cấp thiết bị đến thi công lắp đặt và kiểm định đưa vào vận hành hệ thống trạm biến áp và phân phối điện. Chúng tôi cam kết đảm bảo nguồn điện vận hành liên tục, an toàn và tối ưu chi phí.",
+            items: [
+                "Lắp đặt trạm biến áp treo, trạm bệt, trạm Kiosk công suất lớn.",
+                "Thi công tủ điện trung thế RMU, tủ hạ thế MSB, tủ phân phối DB.",
+                "Rải cáp ngầm, hệ thống thang máy cáp và hệ thống đo đếm điện năng."
+            ],
+            image: "https://images.unsplash.com/photo-1544724569-5f546fd6f2b5?auto=format&fit=crop&w=800&q=80"
+        },
+        "tram-bien-ap": {
+            title: "2. Đường Dây & Trạm Biến Áp",
+            subtitle: "Xây lắp hạ tầng đường dây truyền tải và trạm biến áp cấp điện áp tới 110kV.",
+            description: "Thi công đường dây không trung, đường dây cáp ngầm và xây dựng trạm biến áp quy mô lớn đạt tiêu chuẩn kỹ thuật khắt khe của Tập đoàn Điện lực. Đảm bảo tiến độ bàn giao và an toàn tuyệt đối trong vận hành lưới điện.",
+            items: [
+                "Thi công đường dây truyền tải điện trung thế & cao thế.",
+                "Xây dựng trạm biến áp 35kV, 110kV trọn gói.",
+                "Thử nghiệm, nghiệm thu và đấu nối lưới điện quốc gia."
+            ],
+            image: "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&w=800&q=80"
+        },
+        "me": {
+            title: "3. Hệ Thống Cơ Điện M&E",
+            subtitle: "Tư vấn thiết kế và thi công hệ thống cơ điện tổng thể cho các công trình.",
+            description: "Triển khai đồng bộ hệ thống M&E bao gồm Điện, Thông gió - Điều hòa không khí (HVAC), Cấp thoát nước và Phòng cháy chữa cháy (PCCC) cho các tòa nhà văn phòng, chung cư cao cấp và nhà xưởng công nghiệp.",
+            items: [
+                "Hệ thống điều hòa không khí trung tâm VRV / Chiller.",
+                "Hệ thống PCCC tự động báo cháy và chữa cháy vách tường / Spinkler.",
+                "Hệ thống cấp thoát nước, xử lý nước thải công nghiệp."
+            ],
+            image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80"
+        },
+        "nang-luong": {
+            title: "4. Năng Lượng Tái Tạo",
+            subtitle: "Giải pháp điện mặt trời mái nhà và hệ thống lưu trữ năng lượng BESS/EMS.",
+            description: "Cung cấp giải pháp năng lượng xanh tối ưu chi phí vận hành cho doanh nghiệp, hướng tới mục tiêu phát triển bền vững và giảm phát thải carbon theo xu hướng toàn cầu.",
+            items: [
+                "Lắp đặt hệ thống Điện mặt trời áp mái nhà xưởng (Solar Rooftop).",
+                "Tích hợp hệ thống lưu trữ điện năng BESS dung lượng lớn.",
+                "Hệ thống quản lý năng lượng thông minh EMS giám sát theo thời gian thực."
+            ],
+            image: "https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?auto=format&fit=crop&w=800&q=80"
+        }
+    };
+
+    // 2. Trích xuất tham số "?service=..." từ đường dẫn URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const serviceKey = urlParams.get('service') || 'dien'; // Mặc định là 'dien' nếu không tìm thấy
+
+    // 3. Tìm dữ liệu tương ứng trong kho
+    const data = servicesData[serviceKey] || servicesData['dien'];
+
+    // 4. Cập nhật dữ liệu vào giao diện HTML
+    document.getElementById('page-title').innerText = data.title + " | ASIAN JSC";
+    document.getElementById('service-title').innerText = data.title;
+    document.getElementById('service-subtitle').innerText = data.subtitle;
+    document.getElementById('service-description').innerText = data.description;
+    document.getElementById('service-image').src = data.image;
+
+    // Đổ danh sách các hạng mục kỹ thuật
+    const itemsList = document.getElementById('service-items');
+    itemsList.innerHTML = data.items.map(item => `<li>${item}</li>`).join('');
+    </script>
+</body>
+</html>
