@@ -4,24 +4,100 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Liên Hệ | ASIAN - The Power of Asian</title>
+    <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/responsive.css">
+    
+    <style>
+        /* CSS TỔNG HỢP */
+        .page-padding {
+            padding-top: 80px;
+        }
+
+        .bg-dark-custom {
+            background-color: #1a202c;
+        }
+
+        .bg-header-custom {
+            background-color: #0f172a;
+        }
+
+        .logo-img {
+            max-height: 40px;
+        }
+
+        /* Hiệu ứng rung ô nhập liệu khi báo lỗi */
+        @keyframes shakeError {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-6px); }
+            40%, 80% { transform: translateX(6px); }
+        }
+
+        .form-control.is-invalid {
+            animation: shakeError 0.4s ease-in-out;
+            border-color: #dc3545 !important;
+            background-image: none !important;
+        }
+
+        /* Hiệu ứng trượt nhẹ thông báo thành công */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-15px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-down {
+            animation: fadeInDown 0.4s ease-out forwards;
+        }
+
+        /* Kiểu dáng thông báo thành công */
+        .alert-custom-success {
+            background-color: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            border-left: 5px solid #22c55e;
+            color: #15803d;
+            border-radius: 8px;
+            padding: 1rem;
+        }
+
+        /* Biểu tượng tích xanh nảy sinh động */
+        @keyframes popIcon {
+            0% { transform: scale(0); }
+            80% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        .success-icon-pop {
+            animation: popIcon 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        /* Tùy chỉnh chuyển đổi mượt cho nút bấm */
+        #submitBtn {
+            transition: all 0.3s ease;
+        }
+    </style>
 </head>
 <body>
+    <!-- HEADER -->
     <header class="site-header fixed-top" id="header">
         <nav class="navbar navbar-expand-lg navbar-dark bg-header-custom">
             <div class="container">
                 <a class="navbar-brand" href="index.html"><img src="img/LOGO ASIAN.png" alt="ASIAN Logo" class="logo-img"></a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain"><span class="navbar-toggler-icon"></span></button>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
                 <div class="collapse navbar-collapse" id="navbarMain">
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0 fw-semibold text-uppercase">
                         <li class="nav-item"><a class="nav-link" href="index.html">TRANG CHỦ</a></li>
                         <li class="nav-item"><a class="nav-link" href="about.html">GIỚI THIỆU</a></li>
                         <li class="nav-item"><a class="nav-link" href="services.html">LĨNH VỰC HOẠT ĐỘNG</a></li>
                         <li class="nav-item"><a class="nav-link" href="projects.html">DỰ ÁN</a></li>
-                       
                         <li class="nav-item"><a class="nav-link active" href="contact.html">LIÊN HỆ</a></li>
                     </ul>
                 </div>
@@ -29,6 +105,7 @@
         </nav>
     </header>
 
+    <!-- MAIN CONTENT -->
     <main class="page-padding">
         <section class="bg-dark-custom text-white py-5 mb-5">
             <div class="container py-4 text-center">
@@ -39,6 +116,7 @@
 
         <section class="container mb-5">
             <div class="row g-4">
+                <!-- Cột trái: Thông tin liên hệ -->
                 <div class="col-lg-5">
                     <div class="p-4 bg-light rounded shadow-sm h-100">
                         <h4 class="fw-bold text-primary mb-4">THÔNG TIN LIÊN HỆ</h4>
@@ -47,7 +125,7 @@
                             <i class="fa-solid fa-location-dot text-primary fs-5 me-3 mt-1"></i>
                             <div>
                                 <strong>Địa chỉ:</strong>
-                                <p class="text-muted mb-0">Số 916, Trần Nhân Tông, P. Văn Đẩu, Quận Kiến An, Thành phố Hải Phòng </p>
+                                <p class="text-muted mb-0">Số 916, Trần Nhân Tông, P. Văn Đẩu, Quận Kiến An, Thành phố Hải Phòng</p>
                             </div>
                         </div>
 
@@ -71,49 +149,62 @@
                             <i class="fa-solid fa-globe text-primary fs-5 me-3 mt-1"></i>
                             <div>
                                 <strong>Website:</strong>
-                                <p class="text-muted mb-0"><a href="http://asianhp.com.vn/">asianhp.com.vn</a></p>
+                                <p class="text-muted mb-0"><a href="http://asianhp.com.vn/" target="_blank">asianhp.com.vn</a></p>
+                            </div>
+                        </div>
+
+                        <div class="mb-3 d-flex align-items-start">
+                            <i class="fa-brands fa-facebook text-primary fs-5 me-3 mt-1"></i>
+                            <div>
+                                <strong>Facebook:</strong>
+                                <p class="text-muted mb-0"><a href="https://www.facebook.com/profile.php?id=61565839413393&locale=vi_VN" target="_blank">Facebook Asian</a></p>
                             </div>
                         </div>
                     </div>
                 </div>
 
+                <!-- Cột phải: Form liên hệ -->
                 <div class="col-lg-7">
                     <div class="p-4 bg-white rounded shadow-sm border">
                         <h4 class="fw-bold text-primary mb-3">GỬI YÊU CẦU TƯ VẤN</h4>
-                        <div id="contact-alert" class="d-none alert"></div>
+                        
+                        <!-- Khung hiển thị thông báo thành công -->
+                        <div id="contact-alert" class="d-none"></div>
+
                         <form id="contactForm" novalidate>
                             <div class="row g-3">
                                 <div class="col-md-6">
-                                    <label class="form-label">Họ và tên *</label>
-                                    <input type="text" class="form-control" id="fullname" required>
-                                    <div class="invalid-feedback">Vui lòng nhập họ tên.</div>
+                                    <label for="fullname" class="form-label">Họ và tên <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="fullname">
+                                    <div class="invalid-feedback">Vui lòng nhập họ tên của bạn.</div>
                                 </div>
                                 <div class="col-md-6">
-                                    <label class="form-label">Email *</label>
-                                    <input type="email" class="form-control" id="email" required>
-                                    <div class="invalid-feedback">Vui lòng nhập email hợp lệ.</div>
+                                    <label for="email" class="form-label">Email <span class="text-danger">*</span></label>
+                                    <input type="email" class="form-control" id="email">
+                                    <div class="invalid-feedback">Vui lòng nhập địa chỉ email hợp lệ.</div>
                                 </div>
                                 <div class="col-md-6">
-                                    <label class="form-label">Số điện thoại *</label>
-                                    <input type="tel" class="form-control" id="phone" required>
-                                    <div class="invalid-feedback">Vui lòng nhập số điện thoại hợp lệ.</div>
+                                    <label for="phone" class="form-label">Số điện thoại <span class="text-danger">*</span></label>
+                                    <input type="tel" class="form-control" id="phone">
+                                    <div class="invalid-feedback">Vui lòng nhập số điện thoại hợp lệ (9 - 11 số).</div>
                                 </div>
                                 <div class="col-md-6">
-                                    <label class="form-label">Tên công ty / Tổ chức</label>
+                                    <label for="company" class="form-label">Tên công ty / Tổ chức</label>
                                     <input type="text" class="form-control" id="company">
                                 </div>
                                 <div class="col-12">
-                                    <label class="form-label">Chủ đề</label>
+                                    <label for="subject" class="form-label">Chủ đề</label>
                                     <input type="text" class="form-control" id="subject">
                                 </div>
                                 <div class="col-12">
-                                    <label class="form-label">Nội dung yêu cầu *</label>
-                                    <textarea class="form-control" id="message" rows="4" required></textarea>
-                                    <div class="invalid-feedback">Vui lòng điền nội dung yêu cầu.</div>
+                                    <label for="message" class="form-label">Nội dung yêu cầu <span class="text-danger">*</span></label>
+                                    <textarea class="form-control" id="message" rows="4"></textarea>
+                                    <div class="invalid-feedback">Vui lòng điền nội dung yêu cầu tư vấn.</div>
                                 </div>
                                 <div class="col-12">
-                                    <!-- FRONTEND DEMO NOTICE: BACKEND API ENDPOINT TO BE CONNECTED -->
-                                    <button type="submit" class="btn btn-primary fw-bold px-4 py-2">GỬI YÊU CẦU</button>
+                                    <button type="submit" id="submitBtn" class="btn btn-primary fw-bold px-4 py-2">
+                                        <i class="fa-solid fa-paper-plane me-2"></i>GỬI YÊU CẦU
+                                    </button>
                                 </div>
                             </div>
                         </form>
@@ -123,12 +214,114 @@
         </section>
     </main>
 
+    <!-- FOOTER -->
     <footer class="bg-dark-custom text-white py-4 text-center small opacity-75">
-        <p>&copy; 2026 ASIAN – THE POWER OF ASIAN.JSC</p>
+        <p>&copy; 2026 ASIAN – THE POWER OF ASIAN JSC.</p>
     </footer>
 
+    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="js/main.js"></script>
-    <script src="js/contact.js"></script>
+
+    <!-- JAVASCRIPT XỬ LÝ HIỆU ỨNG -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const contactForm = document.getElementById('contactForm');
+            const alertBox = document.getElementById('contact-alert');
+            const submitBtn = document.getElementById('submitBtn');
+
+            if (contactForm && submitBtn && alertBox) {
+                contactForm.addEventListener('submit', function (e) {
+                    e.preventDefault();
+
+                    const fullname = document.getElementById('fullname');
+                    const email = document.getElementById('email');
+                    const phone = document.getElementById('phone');
+                    const message = document.getElementById('message');
+
+                    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                    const phoneRegex = /^[0-9]{9,11}$/;
+
+                    let isValid = true;
+
+                    // Xóa thông báo lỗi cũ
+                    [fullname, email, phone, message].forEach(input => {
+                        if (input) input.classList.remove('is-invalid');
+                    });
+
+                    // Kiểm tra hợp lệ dữ liệu
+                    if (!fullname.value.trim()) {
+                        fullname.classList.add('is-invalid');
+                        isValid = false;
+                    }
+
+                    if (!email.value.trim() || !emailRegex.test(email.value.trim())) {
+                        email.classList.add('is-invalid');
+                        isValid = false;
+                    }
+
+                    if (!phone.value.trim() || !phoneRegex.test(phone.value.trim())) {
+                        phone.classList.add('is-invalid');
+                        isValid = false;
+                    }
+
+                    if (!message.value.trim()) {
+                        message.classList.add('is-invalid');
+                        isValid = false;
+                    }
+
+                    if (!isValid) return;
+
+                    // Chuyển nút bấm sang trạng thái Đang Gửi (Loading)
+                    const originalBtnText = submitBtn.innerHTML;
+                    submitBtn.disabled = true;
+                    submitBtn.innerHTML = `<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>Đang gửi yêu cầu...`;
+                    alertBox.className = 'd-none';
+
+                    // Giả lập gửi dữ liệu thành công sau 1.2s
+                    setTimeout(() => {
+                        // Đổi nút thành trạng thái thành công
+                        submitBtn.className = 'btn btn-success fw-bold px-4 py-2';
+                        submitBtn.innerHTML = `<i class="fa-solid fa-check me-2"></i>Đã gửi thành công!`;
+
+                        // Hiện hộp thông báo xanh kèm hiệu ứng nảy
+                        alertBox.className = 'alert alert-custom-success shadow-sm mb-4 fade-in-down d-flex align-items-center';
+                        alertBox.innerHTML = `
+                            <div class="me-3 success-icon-pop">
+                                <i class="fa-solid fa-circle-check fs-2 text-success"></i>
+                            </div>
+                            <div>
+                                <h5 class="fw-bold mb-1 text-success">Gửi yêu cầu thành công!</h5>
+                                <p class="mb-0 small text-muted">Cảm ơn bạn đã liên hệ. Đội ngũ kỹ sư ASIAN sẽ phản hồi trong thời gian sớm nhất.</p>
+                            </div>
+                        `;
+
+                        // Cuộn mượt đến thông báo
+                        alertBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+                        // Đặt lại dữ liệu form
+                        contactForm.reset();
+
+                        // Khôi phục nút bấm sau 3.5s
+                        setTimeout(() => {
+                            submitBtn.disabled = false;
+                            submitBtn.className = 'btn btn-primary fw-bold px-4 py-2';
+                            submitBtn.innerHTML = originalBtnText;
+                        }, 3500);
+
+                    }, 1200);
+                });
+
+                // Tự xóa viền đỏ khi người dùng nhập lại vào ô lỗi
+                const inputs = contactForm.querySelectorAll('.form-control');
+                inputs.forEach(input => {
+                    input.addEventListener('input', function () {
+                        if (this.classList.contains('is-invalid')) {
+                            this.classList.remove('is-invalid');
+                        }
+                    });
+                });
+            }
+        });
+    </script>
 </body>
 </html>
