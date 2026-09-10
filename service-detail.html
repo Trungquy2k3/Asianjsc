@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,98 +8,300 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        /* Hiệu ứng xoay mũi tên khi mở/đóng xem thêm */
+        .rotate-arrow {
+            transition: transform 0.3s ease;
+        }
+
+        [aria-expanded="true"] .rotate-arrow {
+            transform: rotate(180deg);
+        }
+
+        .item-detail-box {
+            background-color: #f8f9fa;
+            border-left: 3px solid #0d6efd;
+        }
+    </style>
 </head>
+
 <body>
+    <!-- Header & Navigation -->
+    <header class="site-header fixed-top" id="header">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-header-custom">
+            <div class="container">
+                <a class="navbar-brand" href="index.html">
+                    <img src="img/LOGO ASIAN.png" alt="ASIAN Logo" class="logo-img" id="main-logo">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarMain">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0 fw-semibold text-uppercase">
+                        <li class="nav-item"><a class="nav-link active" href="index.html">TRANG CHỦ</a></li>
+                        <li class="nav-item"><a class="nav-link" href="about.html">GIỚI THIỆU</a></li>
+                        <li class="nav-item"><a class="nav-link" href="services.html">LĨNH VỰC HOẠT ĐỘNG</a></li>
+                        <li class="nav-item"><a class="nav-link" href="projects.html">DỰ ÁN</a></li>
+                        <li class="nav-item"><a class="nav-link" href="news.html">TIN TỨC</a></li>
+                        <li class="nav-item"><a class="nav-link" href="contact.html">LIÊN HỆ</a></li>
+                    </ul>
+                    <div class="ms-lg-3">
+                        <a href="contact.html" class="btn btn-yellow text-dark fw-bold px-4 py-2 text-uppercase">NHẬN TƯ
+                            VẤN</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
     <main class="container py-5 my-5">
         <a href="services.html" class="btn btn-outline-secondary mb-4">
             <i class="fa-solid fa-arrow-left me-2"></i>Quay lại Lĩnh Vực Hoạt Động
         </a>
-        
+
         <div class="row g-4" id="service-content">
             <div class="col-lg-7">
                 <h1 class="fw-bold text-primary mb-3" id="service-title">Tên Dịch Vụ</h1>
                 <p class="lead fw-semibold" id="service-subtitle">Mô tả tóm tắt dịch vụ</p>
                 <hr>
                 <p id="service-description">Nội dung thông tin chi tiết dịch vụ...</p>
-                
+
+                <!-- NÚT MỞ RỘNG THÔNG TIN TỔNG QUAN -->
+                <button class="btn btn-outline-primary d-inline-flex align-items-center gap-2 mb-4 collapsed"
+                    type="button" data-bs-toggle="collapse" data-bs-target="#moreServiceInfo" aria-expanded="false">
+                    <span>Xem thêm thông tin bổ sung</span>
+                    <i class="fa-solid fa-chevron-down rotate-arrow"></i>
+                </button>
+
+                <!-- KHUNG NỘI DUNG THÔNG TIN BỔ SUNG -->
+                <div class="collapse mb-4" id="moreServiceInfo">
+                    <div class="card card-body bg-light border-0 shadow-sm text-secondary" id="service-extra-info">
+                        <!-- Nội dung mở rộng đổ tự động bằng JS -->
+                    </div>
+                </div>
+
                 <h4 class="fw-bold mt-4">Hạng Mục Kỹ Thuật Chính:</h4>
-                <ul id="service-items" class="lh-lg">
-                    <!-- Danh sách hạng mục đổ tự động bằng JS -->
-                </ul>
+
+                <!-- DANH SÁCH HẠNG MỤC CÓ MŨI TÊN XEM THÊM -->
+                <div class="accordion accordion-flush mt-3" id="serviceItemsAccordion">
+                    <!-- Danh sách hạng mục kèm thông tin chi tiết đổ bằng JS -->
+                </div>
             </div>
-            
+
             <div class="col-lg-5">
                 <img id="service-image" src="" class="img-fluid rounded shadow w-100" alt="Hình ảnh dịch vụ">
             </div>
         </div>
     </main>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-    // 1. Khai báo kho dữ liệu riêng biệt cho từng mục
-    const servicesData = {
-        "dien": {
-            title: "1. Hệ Thống Điện Công Nghiệp",
-            subtitle: "Giải pháp hạ tầng phân phối điện năng toàn diện cho nhà máy & khu công nghiệp.",
-            description: "ASIAN JSC cung cấp giải pháp trọn gói từ tư vấn thiết kế, cung cấp thiết bị đến thi công lắp đặt và kiểm định đưa vào vận hành hệ thống trạm biến áp và phân phối điện. Chúng tôi cam kết đảm bảo nguồn điện vận hành liên tục, an toàn và tối ưu chi phí.",
-            items: [
-                "Lắp đặt trạm biến áp treo, trạm bệt, trạm Kiosk công suất lớn.",
-                "Thi công tủ điện trung thế RMU, tủ hạ thế MSB, tủ phân phối DB.",
-                "Rải cáp ngầm, hệ thống thang máy cáp và hệ thống đo đếm điện năng."
-            ],
-            image: "https://images.unsplash.com/photo-1544724569-5f546fd6f2b5?auto=format&fit=crop&w=800&q=80"
-        },
-        "tram-bien-ap": {
-            title: "2. Đường Dây & Trạm Biến Áp",
-            subtitle: "Xây lắp hạ tầng đường dây truyền tải và trạm biến áp cấp điện áp tới 110kV.",
-            description: "Thi công đường dây không trung, đường dây cáp ngầm và xây dựng trạm biến áp quy mô lớn đạt tiêu chuẩn kỹ thuật khắt khe của Tập đoàn Điện lực. Đảm bảo tiến độ bàn giao và an toàn tuyệt đối trong vận hành lưới điện.",
-            items: [
-                "Thi công đường dây truyền tải điện trung thế & cao thế.",
-                "Xây dựng trạm biến áp 35kV, 110kV trọn gói.",
-                "Thử nghiệm, nghiệm thu và đấu nối lưới điện quốc gia."
-            ],
-            image: "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&w=800&q=80"
-        },
-        "me": {
-            title: "3. Hệ Thống Cơ Điện M&E",
-            subtitle: "Tư vấn thiết kế và thi công hệ thống cơ điện tổng thể cho các công trình.",
-            description: "Triển khai đồng bộ hệ thống M&E bao gồm Điện, Thông gió - Điều hòa không khí (HVAC), Cấp thoát nước và Phòng cháy chữa cháy (PCCC) cho các tòa nhà văn phòng, chung cư cao cấp và nhà xưởng công nghiệp.",
-            items: [
-                "Hệ thống điều hòa không khí trung tâm VRV / Chiller.",
-                "Hệ thống PCCC tự động báo cháy và chữa cháy vách tường / Spinkler.",
-                "Hệ thống cấp thoát nước, xử lý nước thải công nghiệp."
-            ],
-            image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80"
-        },
-        "nang-luong": {
-            title: "4. Năng Lượng Tái Tạo",
-            subtitle: "Giải pháp điện mặt trời mái nhà và hệ thống lưu trữ năng lượng BESS/EMS.",
-            description: "Cung cấp giải pháp năng lượng xanh tối ưu chi phí vận hành cho doanh nghiệp, hướng tới mục tiêu phát triển bền vững và giảm phát thải carbon theo xu hướng toàn cầu.",
-            items: [
-                "Lắp đặt hệ thống Điện mặt trời áp mái nhà xưởng (Solar Rooftop).",
-                "Tích hợp hệ thống lưu trữ điện năng BESS dung lượng lớn.",
-                "Hệ thống quản lý năng lượng thông minh EMS giám sát theo thời gian thực."
-            ],
-            image: "https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?auto=format&fit=crop&w=800&q=80"
-        }
-    };
+        // Kho dữ liệu: Bạn có thể tự do cập nhật phần extraInfo và detail của từng item
+        const servicesData = {
+            "dien": {
+                title: "1. Hệ Thống Điện Công Nghiệp",
+                subtitle: "Giải pháp hạ tầng phân phối điện năng toàn diện cho nhà máy & khu công nghiệp.",
+                description: "ASIAN JSC cung cấp giải pháp trọn gói từ tư vấn thiết kế, cung cấp thiết bị đến thi công lắp đặt và kiểm định đưa vào vận hành hệ thống trạm biến áp và phân phối điện.",
+                extraInfo: "<strong>Thông tin bổ sung:</strong> Chúng tôi áp dụng quy trình kiểm định chất lượng ISO 9001:2015, hỗ trợ thủ tục đấu nối trực tiếp với EVN và cung cấp dịch vụ bảo trì định kỳ 24/7.",
+                items: [
+                    {
+                        title: "Lắp đặt trạm biến áp treo, trạm bệt, trạm Kiosk công suất lớn.",
+                        detail: `
+        
+        <ul class="ps-3 mb-0">
+            <li><strong>Thi công trạm biến áp treo:</strong> Chuyên thi công các trạm công suất vừa và nhỏ (đến 500kVA), tối ưu chi phí và diện tích mặt bằng cho các nhà máy, xưởng sản xuất nhỏ.</li>
+            <li><strong>Lắp đặt trạm bệt (xây dựng/kiểu nền):</strong> Đáp ứng công suất lớn (từ 1000kVA trở lên), xây dựng móng trạm chắc chắn, đảm bảo khoảng cách an toàn điện cao áp và đáp ứng quy chuẩn kỹ thuật nghiêm ngặt.</li>
+            <li><strong>Thi công trạm Kiosk hợp bộ:</strong> Giải pháp trạm biến áp trọn gói kín hoàn toàn, tính thẩm mỹ cao, độ an toàn tuyệt đối, tối ưu không gian cho đô thị, khu công nghiệp và tòa nhà thương mại.</li>
+            <li><strong>Thử nghiệm & Đấu nối:</strong> Kiểm tra tổng thể cách điện, nghiệm thu với điện lực địa phương và thực hiện đấu nối an toàn vào lưới điện quốc gia.</li>
+        </ul>
+    `
+                    },
+                    {
+                        title: "Thi công tủ điện trung thế RMU, tủ hạ thế MSB, tủ phân phối DB.",
+                        detail: `
+        
+        <ul class="ps-3 mb-0">
+            <li><strong>Lắp đặt tủ trung thế RMU (Ring Main Unit):</strong> Cung cấp và lắp đặt tủ RMU mở rộng/không mở rộng từ các thương hiệu hàng đầu (Schneider, ABB, Siemens...), bảo vệ hệ thống điện trung thế an toàn vượt trội.</li>
+            <li><strong>Thi công tủ phân phối chính hạ thế MSB:</strong> Gia công, lắp đặt tủ MSB chịu tải lớn, tích hợp hệ thống đóng cắt tự động (ACB/MCCB), đo lường và bù công suất phản kháng (tụ bù) tối ưu điện năng.</li>
+            <li><strong>Lắp đặt tủ phân phối nhánh DB & Tủ điều khiển:</strong> Đấu nối hệ thống tủ phân phối tầng, tủ điều khiển động cơ (MCC), tủ chiếu sáng theo bản vẽ kỹ thuật với nhãn tuyến rõ ràng, dễ bảo trì.</li>
+            
+        </ul>
+    `
+                    },
+                    {
+                        title: "Rải cáp ngầm, hệ thống thang máng cáp và hệ thống đo đếm điện năng",
+                        detail: `
+        
+        <ul class="ps-3 mb-0">
+            <li><strong>Thi công rải cáp ngầm trung & hạ thế:</strong> Đào rãnh cáp, rải cát, đặt ống ghen bảo vệ (HDPE), luồn cáp ngầm chuyên dụng và thực hiện làm đầu cáp co nóng/co nguội chuẩn kỹ thuật.</li>
+            <li><strong>Lắp đặt hệ thống thang máng cáp (Cable Tray/Trunking):</strong> Gia công và thi công treo/đi cố định hệ thống thang máng cáp mạ kẽm/nhúng nóng, tối ưu đường đi của dây dẫn, đảm bảo tản nhiệt và tính thẩm mỹ công trình.</li>
+            <li><strong>Hệ thống đo đếm điện năng & Scada/Substation Control:</strong> Lắp đặt công tơ đo đếm ranh giới, biến dòng (CT), biến áp (VT) đạt tiêu chuẩn kiểm định của Điện lực để nghiệm thu bàn giao.</li>
+        </ul>
+    `
+                    }
+                ],
+                image: "https://images.unsplash.com/photo-1544724569-5f546fd6f2b5?auto=format&fit=crop&w=800&q=80"
+            },
+            "tram-bien-ap": {
+                title: "2. Đường Dây & Trạm Biến Áp",
+                subtitle: "Xây lắp hạ tầng đường dây truyền tải và trạm biến áp cấp điện áp tới 110kV.",
+                description: "Thi công đường dây không trung, đường dây cáp ngầm và xây dựng trạm biến áp quy mô lớn đạt tiêu chuẩn kỹ thuật khắt khe của Tập đoàn Điện lực.",
+                extraInfo: "<strong>Đội ngũ thi công:</strong> Kỹ sư trên 10 năm kinh nghiệm, đầy đủ chứng chỉ an toàn điện cao thế và thiết bị đo kiểm hiện đại.",
+                items: [
+                    {
+                        title: "Thi công đường dây truyền tải điện trung thế & cao thế",
+                        detail: `
+        
+        <ul class="ps-3 mb-0">
+            <li><strong>Đường dây trên không:</strong> Thi công dựng cột (bê tông ly tâm, cột thép hình), kéo dây dẫn, lắp đặt sứ cách điện và phụ kiện cho đường dây trung thế (22kV, 35kV) và cao thế (đến 110kV).</li>
+            <li><strong>Tuyển cáp ngầm trung & cao thế:</strong> Đào rãnh cáp, đặt ống bảo vệ, rải cáp ngầm chuyên dụng và thi công các hộp nối, đầu cáp co nóng/co nguội đạt chuẩn kỹ thuật khắt khe.</li>
+            <li><strong>Hành lang an toàn lưới điện:</strong> Khảo sát, giải phóng mặt bằng, đo đạc khoảng cách an toàn và lắp đặt hệ thống cảnh báo nguy hiểm theo đúng quy định pháp luật.</li>
+        </ul>
+    `
+                    },
+                    {
+                        title: "Xây dựng trạm biến áp 35kV, 110kV trọn gói",
+                        detail: `
+        
+        <ul class="ps-3 mb-0">
+            <li><strong>Xây dựng hạ tầng & Móng trạm:</strong> Thi công nhà điều khiển, móng máy biến áp, hệ thống mương cáp, hàng rào bảo vệ và bể dập sự cố theo tiêu chuẩn ngành điện.</li>
+            <li><strong>Lắp đặt thiết bị lực & Trung thế:</strong> Tải và định vị máy biến áp công suất lớn, lắp đặt máy cắt, dao phụ tải, cầu chì rơi(FCO), chống sét van(LA) và hệ thống tủ trung thế.</li>
+            <li><strong>Hệ thống nhị thứ & SCADA:</strong> Đấu nối tủ điều khiển, bảo vệ rơ-le, hệ thống đo đếm điện năng và tích hợp hệ thống thu thập dữ liệu từ xa kết nối với trung tâm điều độ</li>
+        </ul>
+    `
+                    },
+                    {
+                        title: "Thử nghiệm, nghiệm thu và đấu nối lưới điện quốc gia.",
+                        detail: `
+        
+        <ul class="ps-3 mb-0">
+            <li><strong>Thí nghiệm hiệu chỉnh thiết bị:</strong> Kiểm tra điện áp tăng cao, đo điện trở cách điện, điện trở tiếp địa và thử nghiệm chức năng bảo vệ cho toàn bộ thiết bị trước khi mang điện.</li>
+            <li><strong>Hoàn thiện hồ sơ pháp lý:</strong> Lập hồ sơ hoàn công, đăng ký công tác nghiệm thu và làm việc trực tiếp với các đơn vị thuộc Tập đoàn Điện lực(EVN).</li>
+            <li><strong>Đấu nối & Bàn giao:</strong> Thực hiện thao tác đấu nối đóng điện không tải, đóng điện và thử nghiệm vận hành trước khi bàn giao cho đơn vị vận hành.</li>
+        </ul>
+    `
+                    }
+                ],
+                image: "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&w=800&q=80"
+            },
+            "me": {
+                title: "3. Hệ Thống Cơ Điện M&E",
+                subtitle: "Tư vấn thiết kế và thi công hệ thống cơ điện tổng thể cho các công trình.",
+                description: "Triển khai đồng bộ hệ thống M&E bao gồm Điện, Thông gió - Điều hòa không khí (HVAC), Cấp thoát nước và PCCC.",
+                extraInfo: "<strong>Tiêu chuẩn kỹ thuật:</strong> Thiết kế chuẩn BIM/Revit giúp tối ưu Không gian lắp đặt và hạn chế tối đa xung đột đường ống.",
+                items: [
+                    {
+                        title: "Hệ thống điều hòa không khí trung tâm VRV / Chiller",
+                        detail: `
+        
+        <ul class="ps-3 mb-0">
+            <li><strong>Thi công hệ thống VRV/VRF:</strong> Thiết kế, lắp đặt dàn nóng, dàn lạnh, đi đường ống đồng, ống dẫn gas và đường thoát nước ngưng cho văn phòng, nhà máy, trung tâm thương mại.</li>
+            <li><strong>Lắp đặt hệ thống Chiller:</strong> Thi công trạm Chiller giải nhiệt nước/giải nhiệt gió, lắp đặt hệ thống bơm nước lạnh, tháp giải nhiệt(Cooling Tower) và hệ thống AHU/FCU.</li>
+            <li><strong>Hệ thống thông gió & Xử lí không khí:</strong> Đi đường ống gió tôn mạ kẽm, lắp van gió (VAV,FD), quạt cấp khí tươi, quạt hút khí thải và hệ thống tạo áp cầu thang bộ.</li>
+        </ul>
+    `
+                    },
+                    {
+                        title: "Hệ thống PCCC tự dộng báo cháy, chữa cháy Sprinkler & Hydrant.",
+                        detail: `
+        
+        <ul class="ps-3 mb-0">
+            <li><strong>Hệ thống báo cháy tự động:</strong> Lắp đặt trung tâm báo cháy địa chỉ/thông thường, các đầu báo khói, báo nhiệt, nút ấn khẩn cấp và hệ thống chuông/ đèn cảnh báo.</li>
+            <li><strong>Hệ thống chữa cháy nước & bọt:</strong> Thi công trạm bơm PCCC (bơm điện, bơm diesel, bơm bù áp), đường ống thép chữa cháy, tủ vách tường và mạng lưới đầu phun Sprinkler tự động.</li>
+            <li><strong>Hệ thống chữa cháy khí chuyên dụng:</strong> Thiết kế, lắp đặt hệ thống chữa cháy khí (FM200, Novec 1230, CO2) cho các phòng server, trung tâm dữ liệu và phòng thiết bị điện hạ thế.</li>
+        </ul>
+    `
+                    },
+                    {
+                        title: "Hệ thống cấp thoát nước, xử lý nước thải công nghiệp",
+                        detail: `
+        
+        <ul class="ps-3 mb-0">
+            <li><strong>Hệ thống cấp nước sạch:</strong> Thi công đường ống cấp nước PPR/HDPE, lắp đặt máy bơm tăng áp, bể chứa nước ngầm và hệ thống lọc nước đầu nguồn.</li>
+            <li><strong>Hệ thống thoát nước & Xử lý nước thải:</strong> Bố trí đường ống thoát nước mưa, nước thải sinh hoạt/công nghiệp và thi công trạm xử lý nước thải đạt tiêu chuẩn xả thải môi trường.</li>
+            <li><strong>Lắp đặt thiết bị vệ sinh & Phụ kiện:</strong> Hoàn thiện lắp đặt các thiết bị đầu cuối, van chặn, đồng hồ đo lưu lượng và hệ thống tự động hóa giám sát mực nước bể chứa.</li>
+        </ul>
+    `
+                    }
+                ],
+                image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80"
+            },
+            "nang-luong": {
+                title: "4. Năng Lượng Tái Tạo",
+                subtitle: "Giải pháp điện mặt trời mái nhà và hệ thống lưu trữ năng lượng BESS/EMS.",
+                description: "Cung cấp giải pháp năng lượng xanh tối ưu chi phí vận hành cho doanh nghiệp, hướng tới mục tiêu phát triển bền vững.",
+                extraInfo: "<strong>Mô hình đầu tư:</strong> Hỗ trợ hợp tác theo mô hình PPA (Zero CAPEX) - Doanh nghiệp không cần bỏ vốn ban đầu.",
+                items: [
+                    {
+                        title: "Lắp đặt hệ thống Điện mặt trời áp mái nhà xưởng (Solar Rooftop)",
+                        detail: `
+        
+        <ul class="ps-3 mb-0">
+            <li><strong>Khảo sát & Gia cố kết cấu:</strong> Đánh giá chịu lực mái, thi công gia cố khung giàn, ray nhôm định hình chuyên dụng đảm bảo độ bền cơ học và an toàn trước thời tiết khắc nghiệt.</li>
+            <li><strong>Lắp đặt quang điện & Inverter:</strong> Cung cấp, lắp đặt các tấm pin mặt trời công suất cao (Tier 1) cùng hệ thống bộ biến đổi điện áp (Inverter) trung tâm/chuỗi đạt hiệu suất tối ưu.</li>
+            <li><strong>Hạ tầng đấu nối & An toàn:</strong> Thi công tủ điện Solar AC/DC, hệ thống cắt lọc sét, tiếp địa bảo vệ và hệ thống ngắt khẩn cấp (Rapid Shutdown) chuẩn PCCC.</li>
+        </ul>
+    `
+                    },
+                    {
+                        title: "Tích hợp hệ thống lưu trữ điện năng BESS dung lượng lớn",
+                        detail: `
+        
+        <ul class="ps-3 mb-0">
+            <li><strong>Lắp đặt khối pin lưu trữ (Battery Rack):</strong> Tích hợp các container/tủ pin Lithium-ion (LFP) dung lượng cao, tuổi thọ dài, tối ưu cho nhu cầu xả sâu của nhà máy.</li>
+            <li><strong>Hệ thống chuyển đổi công suất PCS:</strong> Thi công bộ inverter 2 chiều (Power Conversion System) kết nối linh hoạt giữa nguồn lưới, điện mặt trời và hệ thống BESS.</li>
+            <li><strong>Hệ thống an toàn Container BESS:</strong> Trang bị hệ thống quản lý nhiệt độ (HVAC/Liquid Cooling) và hệ thống chữa cháy khí chuyên dụng dành riêng cho pin lưu trữ.</li>
+        </ul>
+    `
+                    },
+                    {
+                        title: "Hệ thống quản lý năng lượng thông minh EMS giám sát theo thời gian thực",
+                        detail: `
+        
+        <ul class="ps-3 mb-0">
+            <li><strong>Giám sát & Điều khiển tự động:</strong> Thu thập dữ liệu công suất, điện áp, dòng điện theo thời gian thực thông qua hệ thống cảm biến và đồng hồ đo đếm thông minh.</li>
+            <li><strong>Tối ưu hóa chi phí điện năng:</strong> Tự động điều phối sạc/xả pin BESS theo giờ cao điểm - thấp điểm (Peak Shaving) để cắt giảm tối đa chi phí điện cho doanh nghiệp.</li>
+            <li><strong>Cảnh báo sự cố & Báo cáo:</strong> Tích hợp giao diện điều khiển Cloud/IoT, tự động gửi cảnh báo sự cố qua SMS/Email và xuất báo cáo hiệu suất định kỳ.</li>
+        </ul>
+    `
+                    }
+                ],
+                image: "https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?auto=format&fit=crop&w=800&q=80"
+            }
+        };
 
-    // 2. Trích xuất tham số "?service=..." từ đường dẫn URL
-    const urlParams = new URLSearchParams(window.location.search);
-    const serviceKey = urlParams.get('service') || 'dien'; // Mặc định là 'dien' nếu không tìm thấy
+        // Lấy thông tin URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const serviceKey = urlParams.get('service') || 'dien';
+        const data = servicesData[serviceKey] || servicesData['dien'];
 
-    // 3. Tìm dữ liệu tương ứng trong kho
-    const data = servicesData[serviceKey] || servicesData['dien'];
+        // Hiển thị dữ liệu lên màn hình
+        document.getElementById('page-title').innerText = data.title + " | ASIAN JSC";
+        document.getElementById('service-title').innerText = data.title;
+        document.getElementById('service-subtitle').innerText = data.subtitle;
+        document.getElementById('service-description').innerText = data.description;
+        document.getElementById('service-extra-info').innerHTML = data.extraInfo;
+        document.getElementById('service-image').src = data.image;
 
-    // 4. Cập nhật dữ liệu vào giao diện HTML
-    document.getElementById('page-title').innerText = data.title + " | ASIAN JSC";
-    document.getElementById('service-title').innerText = data.title;
-    document.getElementById('service-subtitle').innerText = data.subtitle;
-    document.getElementById('service-description').innerText = data.description;
-    document.getElementById('service-image').src = data.image;
-
-    // Đổ danh sách các hạng mục kỹ thuật
-    const itemsList = document.getElementById('service-items');
-    itemsList.innerHTML = data.items.map(item => `<li>${item}</li>`).join('');
+        // Đổ danh sách hạng mục kỹ thuật kèm mũi tên Xem thêm
+        const accordionContainer = document.getElementById('serviceItemsAccordion');
+        accordionContainer.innerHTML = data.items.map((item, index) => `
+        <div class="accordion-item border rounded mb-2 overflow-hidden shadow-sm">
+            <h2 class="accordion-header">
+                <button class="accordion-button collapsed fw-semibold text-dark bg-white" type="button" data-bs-toggle="collapse" data-bs-target="#item-collapse-${index}">
+                    <i class="fa-solid fa-check-circle text-primary me-2"></i> ${item.title}
+                </button>
+            </h2>
+            <div id="item-collapse-${index}" class="accordion-collapse collapse" data-bs-parent="#serviceItemsAccordion">
+                <div class="accordion-body item-detail-box text-muted small">
+                    <i class="fa-solid fa-circle-info me-1 text-primary"></i> ${item.detail}
+                </div>
+            </div>
+        </div>
+    `).join('');
     </script>
 </body>
+
 </html>
