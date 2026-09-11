@@ -4,17 +4,56 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dự Án | ASIAN - The Power of Asian</title>
+    <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <!-- File CSS gốc của dự án -->
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/responsive.css">
+
+    <style>
+        /* CSS bổ sung cho hiệu ứng lọc dự án */
+        .page-padding {
+            padding-top: 80px;
+        }
+
+        .project-item-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .project-item-card:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Hiệu ứng hiển thị mượt khi lọc dự án */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fade-in {
+            animation: fadeInUp 0.4s ease forwards;
+        }
+    </style>
 </head>
 <body>
+    <!-- HEADER (Giữ nguyên class và style màu như ban đầu) -->
     <header class="site-header fixed-top" id="header">
         <nav class="navbar navbar-expand-lg navbar-dark bg-header-custom">
             <div class="container">
-                <a class="navbar-brand" href="index.html"><img src="img/LOGO ASIAN.png" alt="ASIAN Logo" class="logo-img"></a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain"><span class="navbar-toggler-icon"></span></button>
+                <a class="navbar-brand" href="index.html">
+                    <img src="img/LOGO ASIAN.png" alt="ASIAN Logo" class="logo-img">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
                 <div class="collapse navbar-collapse" id="navbarMain">
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0 fw-semibold text-uppercase">
                         <li class="nav-item"><a class="nav-link" href="index.html">TRANG CHỦ</a></li>
@@ -28,7 +67,9 @@
         </nav>
     </header>
 
+    <!-- MAIN CONTENT -->
     <main class="page-padding">
+        <!-- Banner tiêu đề -->
         <section class="bg-dark-custom text-white py-5 mb-4">
             <div class="container py-4 text-center">
                 <h1 class="display-5 fw-bold text-uppercase">DANH MỤC DỰ ÁN</h1>
@@ -36,15 +77,32 @@
             </div>
         </section>
 
+        <!-- Phần danh sách dự án & bộ lọc -->
         <section class="container mb-5">
-           
+            <div class="text-center mb-4">
+                <span class="text-primary fw-bold text-uppercase sub-title">HỒ SƠ NĂNG LỰC</span>
+                <h2 class="fw-bold section-title">DỰ ÁN TIÊU BIỂU</h2>
+                <div class="title-line mx-auto mb-4"></div>
 
+                <!-- Nút lọc danh mục (Filter Buttons) -->
+                <div class="d-flex flex-wrap justify-content-center gap-2 mb-4" id="project-filters">
+                    <button type="button" class="btn btn-outline-primary active" data-filter="all">TẤT CẢ</button>
+                    <button type="button" class="btn btn-outline-primary" data-filter="dien-luc">ĐIỆN LỰC</button>
+                    <button type="button" class="btn btn-outline-primary" data-filter="tram-bien-ap">TRẠM BIẾN ÁP</button>
+                    <button type="button" class="btn btn-outline-primary" data-filter="cong-nghiep">CÔNG NGHIỆP</button>
+                    <button type="button" class="btn btn-outline-primary" data-filter="me">M&E</button>
+                    <button type="button" class="btn btn-outline-primary" data-filter="nang-luong">NĂNG LƯỢNG</button>
+                </div>
+            </div>
+
+            <!-- Danh sách thẻ dự án -->
             <div class="row g-4" id="projects-list-container">
-                <div class="col-md-6 col-lg-4 project-item-card" data-category="tram-bien-ap" data-year="2025">
+                <!-- Dự án 1 -->
+                <div class="col-md-6 col-lg-4 project-item-card" data-category="tram-bien-ap">
                     <div class="card h-100 shadow-sm">
-                        <img src="img/Thị Vải -3.png" class="card-img-top" alt="Trạm Biến Áp 110kV">
+                        <img src="img/Thị Vải -3.png" class="card-img-top" alt="Trạm Biến Áp LNG Thị Vải">
                         <div class="card-body">
-                            <span class="badge bg-primary mb-2">M&E</span>
+                            <span class="badge bg-primary mb-2">TRẠM BIẾN ÁP</span>
                             <h5 class="card-title fw-bold">Thi công đào hào cáp - Công trình LNG Thị Vải</h5>
                             <p class="small text-muted mb-2">Cái Mép, Việt Nam | Năm: 2023</p>
                             <a href="project-detail.html" class="btn btn-outline-primary btn-sm">Xem chi tiết</a>
@@ -52,62 +110,101 @@
                     </div>
                 </div>
 
-                <div class="col-md-6 col-lg-4 project-item-card" data-category="me" data-year="2026">
+                <!-- Dự án 2 -->
+                <div class="col-md-6 col-lg-4 project-item-card" data-category="dien-luc">
                     <div class="card h-100 shadow-sm">
-                        <img src="img/TDB - 2.png" class="card-img-top" alt="M&E Nhà Máy">
+                        <img src="img/TDB - 2.png" class="card-img-top" alt="Tàu rải cáp CSV18">
                         <div class="card-body">
-                            <span class="badge bg-primary mb-2">Điện lực</span>
+                            <span class="badge bg-primary mb-2">ĐIỆN LỰC</span>
                             <h5 class="card-title fw-bold">Cung cấp vật tư, thiết bị thi công hệ thống điện cho tàu rải cáp 8000T kí hiệu CSV18 - Công ty cổ phần đóng tàu Thái Bình Dương.</h5>
                             <p class="small text-muted mb-2">Hải Phòng | Năm: 2026</p>
                             <a href="project-detail-2.html" class="btn btn-outline-primary btn-sm">Xem chi tiết</a>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 col-lg-4 project-item-card" data-category="me" data-year="2026">
+
+                <!-- Dự án 3 -->
+                <div class="col-md-6 col-lg-4 project-item-card" data-category="cong-nghiep">
                     <div class="card h-100 shadow-sm">
-                        <img src="img/Long thành 2.jpg" class="card-img-top" alt="M&E Nhà Máy">
+                        <img src="img/Long thành 2.jpg" class="card-img-top" alt="Cảng HKQT Long Thành">
                         <div class="card-body">
-                            <span class="badge bg-primary mb-2">Công nghiệp</span>
+                            <span class="badge bg-primary mb-2">CÔNG NGHIỆP</span>
                             <h5 class="card-title fw-bold">Hệ thống chống ăn mòn đường ống – Cảng Hàng không Quốc tế Long Thành</h5>
-                            <p class="small text-muted mb-2">Đồng Nai| Năm: 2025</p>
+                            <p class="small text-muted mb-2">Đồng Nai | Năm: 2025</p>
                             <a href="project-detail-3.html" class="btn btn-outline-primary btn-sm">Xem chi tiết</a>
                         </div>
                     </div>
                 </div>
-                  <div class="col-md-6 col-lg-4 project-item-card" data-category="me" data-year="2026">
+
+                <!-- Dự án 4 -->
+                <div class="col-md-6 col-lg-4 project-item-card" data-category="cong-nghiep">
                     <div class="card h-100 shadow-sm">
-                        <img src="img/Hạ Long 1.jpg" class="card-img-top" alt="M&E Nhà Máy">
+                        <img src="img/Hạ Long 1.jpg" class="card-img-top" alt="Tàu CSOV 8720">
                         <div class="card-body">
-                            <span class="badge bg-primary mb-2">Công nghiệp</span>
+                            <span class="badge bg-primary mb-2">CÔNG NGHIỆP</span>
                             <h5 class="card-title fw-bold">Thi công hệ thống điện toàn tàu – CSOV 8720 YN552207</h5>
-                            <p class="small text-muted mb-2">Quảng Ninh, Việt Nam| Năm: 2024-2025</p>
+                            <p class="small text-muted mb-2">Quảng Ninh, Việt Nam | Năm: 2024-2025</p>
                             <a href="project-detail-4.html" class="btn btn-outline-primary btn-sm">Xem chi tiết</a>
                         </div>
                     </div>
                 </div>
 
-                <div class="col-md-6 col-lg-4 project-item-card" data-category="me" data-year="2026">
+                <!-- Dự án 5 -->
+                <div class="col-md-6 col-lg-4 project-item-card" data-category="dien-luc">
                     <div class="card h-100 shadow-sm">
-                        <img src="img/189.jpg" class="card-img-top" alt="M&E Nhà Máy">
+                        <img src="img/189.jpg" class="card-img-top" alt="Nhà máy đóng tàu 189">
                         <div class="card-body">
-                            <span class="badge bg-primary mb-2">Điện lực</span>
+                            <span class="badge bg-primary mb-2">ĐIỆN LỰC</span>
                             <h5 class="card-title fw-bold">THI CÔNG LẮP ĐẶT HẠNG MỤC ĐIỆN TÀU – NHÀ MÁY ĐÓNG TÀU 189</h5>
-                            <p class="small text-muted mb-2">Quảng Ninh, Việt Nam| Năm: 2024-2025</p>
+                            <p class="small text-muted mb-2">KCN Đình Vũ, Hải Phòng</p>
                             <a href="project-detail-5.html" class="btn btn-outline-primary btn-sm">Xem chi tiết</a>
                         </div>
                     </div>
                 </div>
-
             </div>
         </section>
     </main>
 
+    <!-- FOOTER -->
     <footer class="bg-dark-custom text-white py-4 text-center small opacity-75">
-        <p>&copy; 2026 ASIAN – THE POWER OF ASIAN JSC.</p>
+        <p class="mb-0">&copy; 2026 ASIAN – THE POWER OF ASIAN JSC.</p>
     </footer>
 
+    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="js/main.js"></script>
-    <script src="js/projects.js"></script>
+
+    <!-- JAVASCRIPT XỬ LÝ BỘ LỌC -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const filterButtons = document.querySelectorAll('#project-filters button');
+            const projectItems = document.querySelectorAll('.project-item-card');
+
+            if (filterButtons.length > 0 && projectItems.length > 0) {
+                filterButtons.forEach(button => {
+                    button.addEventListener('click', function () {
+                        // 1. Chuyển trạng thái active cho nút
+                        filterButtons.forEach(btn => btn.classList.remove('active'));
+                        this.classList.add('active');
+
+                        // 2. Lấy danh mục filter
+                        const filterValue = this.getAttribute('data-filter');
+
+                        // 3. Hiển thị/Ẩn dự án
+                        projectItems.forEach(item => {
+                            const itemCategory = item.getAttribute('data-category');
+
+                            if (filterValue === 'all' || itemCategory === filterValue) {
+                                item.classList.remove('d-none');
+                                item.classList.add('animate-fade-in');
+                            } else {
+                                item.classList.add('d-none');
+                                item.classList.remove('animate-fade-in');
+                            }
+                        });
+                    });
+                });
+            }
+        });
+    </script>
 </body>
 </html>
