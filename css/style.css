@@ -22,18 +22,27 @@ h1, h2, h3, h4, h5, h6, .fw-bold {
     font-family: var(--font-heading);
 }
 
-/* Header & Navbar Styling */
+/* Header 2 mảng màu Chuyển tiếp */
 .bg-header-custom {
-    background-color: rgba(88, 126, 163, 0.95);
-    backdrop-filter: blur(8px);
-    transition: all 0.3s ease;
+    /* Mảng 1: Xanh lá sáng | Mảng 2: Xanh lam / Xanh đậm */
+    background: linear-gradient(90deg, rgba(14, 210, 112, 0.95) 40%, rgba(103, 138, 209, 0.98) 100%);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    transition: all 0.4s ease;
 }
 
 .logo-img {
-    height: 70px;
+    height: 100px;
     width: auto;
     object-fit: contain;
-    
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.3s ease;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.15));
+}
+
+.navbar-brand:hover .logo-img {
+    transform: scale(1.06) rotate(-1deg);
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.25));
 }
 
 .nav-link {
