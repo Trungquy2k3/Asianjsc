@@ -25,7 +25,6 @@
                         <li class="nav-item"><a class="nav-link" href="about.html">GIỚI THIỆU</a></li>
                         <li class="nav-item"><a class="nav-link" href="services.html">LĨNH VỰC HOẠT ĐỘNG</a></li>
                         <li class="nav-item"><a class="nav-link active" href="projects.html">DỰ ÁN</a></li>
-
                         <li class="nav-item"><a class="nav-link" href="contact.html">LIÊN HỆ</a></li>
                     </ul>
                 </div>
@@ -45,7 +44,52 @@
         <section class="container mb-5">
             <div class="row">
                 <div class="col-lg-8 mb-4 mb-lg-0">
-                    <img src="img/Long thành 1.jpg" alt="Dự án hào cáp" class="img-fluid rounded mb-4 shadow-sm">
+                    
+                    <!-- BẮT ĐẦU: KHU VỰC BỘ BỘ BỘ BỘ BỘ BỘ GALLERY ẢNH -->
+                    <div class="project-gallery mb-4">
+                        <!-- Slide ảnh chính (Carousel) -->
+                        <div id="projectCarousel" class="carousel slide shadow-sm rounded overflow-hidden" data-bs-ride="carousel">
+                            <div class="carousel-inner">
+                                <div class="carousel-item active">
+                                    <img src="img/Long thành 1.jpg" class="d-block w-100 object-fit-cover" style="height: 420px;" alt="Dự án 1">
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="img/Long thành 2.jpg" class="d-block w-100 object-fit-cover" style="height: 420px;" alt="Dự án 2">
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="img/Long thành -3.jpg" class="d-block w-100 object-fit-cover" style="height: 420px;" alt="Dự án 3">
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="img/Long thành - 4.jpg" class="d-block w-100 object-fit-cover" style="height: 420px;" alt="Dự án 4">
+                                </div>
+                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#projectCarousel" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Trước</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#projectCarousel" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Sau</span>
+                            </button>
+                        </div>
+
+                        <!-- Danh sách ảnh nhỏ xem trước (Thumbnails) -->
+                        <div class="row g-2 mt-2">
+                            <div class="col-3">
+                                <img src="img/Long thành 1.jpg" class="img-fluid rounded border cursor-pointer object-fit-cover" style="height: 80px; width: 100%; cursor: pointer;" data-bs-target="#projectCarousel" data-bs-slide-to="0" alt="Thumb 1">
+                            </div>
+                            <div class="col-3">
+                                <img src="img/Long thành 2.jpg" class="img-fluid rounded border cursor-pointer object-fit-cover" style="height: 80px; width: 100%; cursor: pointer;" data-bs-target="#projectCarousel" data-bs-slide-to="1" alt="Thumb 2">
+                            </div>
+                            <div class="col-3">
+                                <img src="img/Long thành -3.jpg" class="img-fluid rounded border cursor-pointer object-fit-cover" style="height: 80px; width: 100%; cursor: pointer;" data-bs-target="#projectCarousel" data-bs-slide-to="2" alt="Thumb 3">
+                            </div>
+                            <div class="col-3">
+                                <img src="img/Long thành - 4.jpg" class="img-fluid rounded border cursor-pointer object-fit-cover" style="height: 80px; width: 100%; cursor: pointer;" data-bs-target="#projectCarousel" data-bs-slide-to="3" alt="Thumb 4">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- KẾT THÚC: KHU VỰC GALLERY ẢNH -->
 
                     <h4 class="fw-bold text-primary mb-3">Mô Tả Quy Mô & Giải Pháp Kỹ Thuật</h4>
                     <p><strong>Hệ thống chống ăn mòn – Cảng Hàng không Quốc tế Long Thành</strong></p>
@@ -55,22 +99,22 @@
                         ống.</p>
 
                     <p><strong>Quy mô dự án</strong></p>
-                    <p> - Đường ống có kích thước từ DN150 đến DN500.</p>
-                    <p> - Diện tích bề mặt chống ăn mòn đã thực hiện khoảng 2.000 m².</p>
-                    <p> - Phạm vi xử lý bao gồm bề mặt bên trong và bên ngoài đường ống.</p>
-                    <p> - Áp dụng giải pháp xử lý và phủ bảo vệ phù hợp với yêu cầu kỹ thuật của hệ thống.</p>
+                    <ul class="list-unstyled ps-3">
+                        <li> - Đường ống có kích thước từ DN150 đến DN500.</li>
+                        <li> - Diện tích bề mặt chống ăn mòn đã thực hiện khoảng 2.000 m².</li>
+                        <li> - Phạm vi xử lý bao gồm bề mặt bên trong và bên ngoài đường ống.</li>
+                        <li> - Áp dụng giải pháp xử lý và phủ bảo vệ phù hợp với yêu cầu kỹ thuật của hệ thống.</li>
+                    </ul>
 
                     <p><strong>Giải pháp kỹ thuật</strong></p>
 
                     <p><strong>1. Khảo sát và đánh giá hiện trạng</strong></p>
                     <p>Kiểm tra tình trạng bề mặt, mức độ ăn mòn và các vị trí có nguy cơ phát sinh ăn mòn để xác định
-                        phương án xử lý phù hợp.
-                    </p>
+                        phương án xử lý phù hợp.</p>
 
                     <p><strong>2. Xử lý bề mặt</strong></p>
                     <p>Làm sạch và chuẩn bị bề mặt trước khi sơn nhằm loại bỏ lớp gỉ, tạp chất và các yếu tố ảnh hưởng
                         đến độ bám dính của hệ thống lớp phủ.</p>
-
 
                     <p><strong>3. Hệ thống sơn bảo vệ</strong></p>
                     <p>Thi công hệ thống lớp phủ chống ăn mòn theo yêu cầu kỹ thuật, đảm bảo độ bám dính, độ phủ và khả
@@ -83,11 +127,10 @@
                     <p><strong>5. Đảm bảo tuổi thọ và vận hành</strong></p>
                     <p>Giải pháp chống ăn mòn nhằm hạn chế tốc độ xuống cấp của đường ống, kéo dài tuổi thọ thiết bị,
                         giảm chi phí bảo trì và đảm bảo độ tin cậy của hệ thống trong quá trình vận hành.</p>
-
                 </div>
 
                 <div class="col-lg-4">
-                    <div class="p-4 bg-light rounded shadow-sm border">
+                    <div class="p-4 bg-light rounded shadow-sm border sticky-top" style="top: 100px;">
                         <h5 class="fw-bold border-bottom pb-2 mb-3 text-primary">THÔNG TIN DỰ ÁN</h5>
                         <p class="mb-2"><strong>Tên dự án:</strong> Hệ thống chống ăn mòn đường ống – Cảng Hàng không
                             Quốc tế Long Thành</p>
@@ -95,11 +138,14 @@
                         <p class="mb-2"><strong>Địa điểm:</strong> Cảng Hàng không Quốc tế Long Thành, tỉnh Đồng Nai</p>
                         <p class="mb-2"><strong>Năm hoàn thành:</strong> 2025 -> nay</p>
                         <p class="mb-2"><strong>Loại công trình:</strong> Sơn chống ăn mòn đường ống dầu</p>
-                        <p class="mb-2"><strong>Quy mô: </strong> Xử lý chống ăn mòn cho hệ thống đường ống có đường kính DN150 – DN500, với diện tích bề mặt đã thực hiện khoảng 2.000 m².</p>
+                        <p class="mb-2"><strong>Quy mô: </strong> Xử lý chống ăn mòn cho hệ thống đường ống có đường
+                            kính DN150 – DN500, với diện tích bề mặt đã thực hiện khoảng 2.000 m².</p>
                         <p class="mb-2"><strong>Phạm vi công việc:</strong> Đánh giá hiện trạng ăn mòn; xử lý bề mặt;
                             thi công hệ thống sơn bảo vệ chống ăn mòn cho bề mặt bên trong và bên ngoài đường ống; kiểm
                             tra chất lượng lớp phủ và các công tác kỹ thuật liên quan.</p>
-                        <p class="mb-2"><strong>Mục tiêu:</strong> Bảo vệ đường ống trước tác động của môi trường, hạn chế quá trình ăn mòn, nâng cao tuổi thọ thiết bị và đảm bảo độ tin cậy trong quá trình vận hành.</p>
+                        <p class="mb-2"><strong>Mục tiêu:</strong> Bảo vệ đường ống trước tác động của môi trường, hạn
+                            chế quá trình ăn mòn, nâng cao tuổi thọ thiết bị và đảm bảo độ tin cậy trong quá trình vận
+                            hành.</p>
                         <hr>
                         <a href="contact.html" class="btn btn-yellow w-100 fw-bold">TƯ VẤN DỰ ÁN TƯƠNG TỰ</a>
                     </div>
