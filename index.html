@@ -26,6 +26,35 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/responsive.css">
+    <style>
+    .gallery-item {
+        cursor: pointer;
+        position: relative;
+    }
+    .gallery-img {
+        transition: transform 0.4s ease;
+    }
+    .gallery-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.4);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+    .gallery-item:hover .gallery-overlay {
+        opacity: 1;
+    }
+    .gallery-item:hover .gallery-img {
+        transform: scale(1.05);
+    }
+    .max-vh-85 {
+        max-height: 85vh;
+        object-fit: contain;
+    }
+</style>
 </head>
 
 <body>
@@ -92,8 +121,82 @@
                     <div class="col-lg-6 mb-4 mb-lg-0">
                         <div class="position-relative">
                             <!-- PLACEHOLDER IMAGE: REPLACE WITH REAL ASIAN CONSTRUCTION PHOTO -->
-                            <img src="img/Ảnh tập thể.jpg" alt="Công trình thi công điện ASIAN"
-                                class="img-fluid rounded-3 shadow-lg">
+                            <!-- BẮT ĐẦU: GALLERY NÂNG CẤP (MAIN FEATURE + INTERACTIVE GRID) -->
+                            <div class="project-gallery mb-4">
+                                <div class="row g-2">
+                                    <!-- Ảnh chính nổi bật (Bên trái) -->
+                                    <div class="col-md-8">
+                                        <div class="gallery-item main-img-box rounded overflow-hidden shadow-sm position-relative h-100"
+                                            data-bs-toggle="modal" data-bs-target="#imageLightbox"
+                                            onclick="updateLightbox('img/ảnh kéo cáp -2.jpg')">
+                                            <img src="img/ảnh kéo cáp -2.jpg" class="w-100 h-100 object-fit-cover gallery-img"
+                                                alt="Dự án 1" style="min-height: 420px; max-height: 420px;">
+                                            <div
+                                                class="gallery-overlay d-flex align-items-center justify-content-center">
+                                                <span class="btn btn-sm btn-light rounded-circle"><i
+                                                        class="fa-solid fa-magnifying-glass-plus text-dark"></i></span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Cột 3 ảnh phụ xếp dọc (Bên phải) -->
+                                    <div class="col-md-4 d-flex flex-column justify-content-between gap-2"
+                                        style="height: 420px;">
+                                        <div class="gallery-item sub-img-box rounded overflow-hidden shadow-sm position-relative flex-fill"
+                                            data-bs-toggle="modal" data-bs-target="#imageLightbox"
+                                            onclick="updateLightbox('img/Ảnh tập thể.jpg')">
+                                            <img src="img/Ảnh tập thể.jpg" class="w-100 h-100 object-fit-cover gallery-img"
+                                                alt="Dự án 2">
+                                            <div
+                                                class="gallery-overlay d-flex align-items-center justify-content-center">
+                                                <span class="btn btn-sm btn-light rounded-circle"><i
+                                                        class="fa-solid fa-magnifying-glass-plus text-dark"></i></span>
+                                            </div>
+                                        </div>
+
+                                        <div class="gallery-item sub-img-box rounded overflow-hidden shadow-sm position-relative flex-fill"
+                                            data-bs-toggle="modal" data-bs-target="#imageLightbox"
+                                            onclick="updateLightbox('img/Ảnh TBD- chiều.jpg')">
+                                            <img src="img/Ảnh TBD- chiều.jpg" class="w-100 h-100 object-fit-cover gallery-img"
+                                                alt="Dự án 3">
+                                            <div
+                                                class="gallery-overlay d-flex align-items-center justify-content-center">
+                                                <span class="btn btn-sm btn-light rounded-circle"><i
+                                                        class="fa-solid fa-magnifying-glass-plus text-dark"></i></span>
+                                            </div>
+                                        </div>
+
+                                        <!-- Ảnh thứ 4 có Lớp phủ đếm số lượng (+1 Xem thêm) -->
+                                        <div class="gallery-item sub-img-box rounded overflow-hidden shadow-sm position-relative flex-fill"
+                                            data-bs-toggle="modal" data-bs-target="#imageLightbox"
+                                            onclick="updateLightbox('img/Long thành - Hoàng.jpg')">
+                                            <img src="img/Long thành - Hoàng.jpg" class="w-100 h-100 object-fit-cover gallery-img"
+                                                alt="Dự án 4">
+                                            <div
+                                                class="gallery-overlay d-flex align-items-center justify-content-center">
+                                                <span class="text-white fw-bold"><i class="fa-solid fa-expand me-1"></i>
+                                                    Phóng to</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Modal Popup Lightbox để phóng to ảnh khi click -->
+                            <div class="modal fade" id="imageLightbox" tabindex="-1" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered modal-lg">
+                                    <div class="modal-content bg-transparent border-0">
+                                        <div class="modal-body p-0 text-center position-relative">
+                                            <button type="button"
+                                                class="btn-close btn-close-white position-absolute top-0 end-0 m-3 z-3"
+                                                data-bs-dismiss="modal" aria-label="Close"></button>
+                                            <img src="" id="lightboxImage" class="img-fluid rounded shadow-lg max-vh-85"
+                                                alt="Ảnh phóng to">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                             <div
                                 class="experience-badge bg-primary-dark text-white p-3 rounded shadow position-absolute bottom-0 start-0 m-3">
                                 <h3 class="fw-bold mb-0 text-yellow">ASIAN JSC</h3>
@@ -345,8 +448,10 @@
                             <div class="p-3 bg-white">
                                 <span class="badge bg-secondary mb-2">Công nghiệp</span>
                                 <h5 class="fw-bold"><a href="project-detail.html"
-                                        class="text-decoration-none text-dark">Thi công đào hào cáp - Công trình LNG Thị Vải</a></h5>
-                                <p class="small text-muted mb-1"><i class="fa-solid fa-location-dot me-1"></i> Cái Mép, Việt Nam | 2019</p>
+                                        class="text-decoration-none text-dark">Thi công đào hào cáp - Công trình LNG Thị
+                                        Vải</a></h5>
+                                <p class="small text-muted mb-1"><i class="fa-solid fa-location-dot me-1"></i> Cái Mép,
+                                    Việt Nam | 2019</p>
                             </div>
                         </div>
                     </div>
@@ -355,7 +460,8 @@
                     <div class="col-md-6 col-lg-4 project-item" data-category="cong-nghiep me">
                         <div class="project-card border-0 shadow-sm rounded overflow-hidden">
                             <div class="project-img-box position-relative">
-                                <img src="img/TDB - 2.png" alt="Hệ thống M&E Nhà máy Công Nghiệp" class="img-fluid w-100">
+                                <img src="img/TDB - 2.png" alt="Hệ thống M&E Nhà máy Công Nghiệp"
+                                    class="img-fluid w-100">
                                 <div class="project-overlay d-flex align-items-center justify-content-center">
                                     <a href="project-detail-2.html" class="btn btn-yellow fw-bold text-dark"><i
                                             class="fa-solid fa-eye me-1"></i> Chi Tiết</a>
@@ -364,8 +470,10 @@
                             <div class="p-3 bg-white">
                                 <span class="badge bg-secondary mb-2">M&E Điện Lực</span>
                                 <h5 class="fw-bold"><a href="project-detail-2.html"
-                                        class="text-decoration-none text-dark">Thi công hệ thống điện cho tàu rải cáp CSV-18 </a></h5>
-                                <p class="small text-muted mb-1"><i class="fa-solid fa-location-dot me-1"></i> Nhà máy đóng tàu Thái Bình Dương, Cầu Khuể, Tiên Lãng, Hải Phòng </p>
+                                        class="text-decoration-none text-dark">Thi công hệ thống điện cho tàu rải cáp
+                                        CSV-18 </a></h5>
+                                <p class="small text-muted mb-1"><i class="fa-solid fa-location-dot me-1"></i> Nhà máy
+                                    đóng tàu Thái Bình Dương, Cầu Khuể, Tiên Lãng, Hải Phòng </p>
                             </div>
                         </div>
                     </div>
@@ -384,7 +492,8 @@
                             <div class="p-3 bg-white">
                                 <span class="badge bg-secondary mb-2">Công nghiệp</span>
                                 <h5 class="fw-bold"><a href="project-detail-3.html"
-                                        class="text-decoration-none text-dark">Hệ thống chống ăn mòn đường ống – Cảng Hàng không Quốc tế Long Thành </a></h5>
+                                        class="text-decoration-none text-dark">Hệ thống chống ăn mòn đường ống – Cảng
+                                        Hàng không Quốc tế Long Thành </a></h5>
                                 <p class="small text-muted mb-1"><i class="fa-solid fa-location-dot me-1"></i> Cát Hiệp
                                     | 2020</p>
                             </div>
@@ -405,7 +514,8 @@
                             <div class="p-3 bg-white">
                                 <span class="badge bg-secondary mb-2">ĐIỆN LỰC</span>
                                 <h5 class="fw-bold">
-                                    <a href="project-detail-4.html" class="text-decoration-none text-dark">Thi công hệ thống điện cho Series tàu Dịch vụ điện gió CSOV 8720, 9020</a>
+                                    <a href="project-detail-4.html" class="text-decoration-none text-dark">Thi công hệ
+                                        thống điện cho Series tàu Dịch vụ điện gió CSOV 8720, 9020</a>
                                 </h5>
                                 <p class="small text-muted mb-1">
                                     <i class="fa-solid fa-location-dot me-1"></i> Nhà máy đóng tàu Hạ Long, Quảng Ninh
@@ -428,10 +538,13 @@
                             <div class="p-3 bg-white">
                                 <span class="badge bg-secondary mb-2">ĐIỆN LỰC</span>
                                 <h5 class="fw-bold">
-                                    <a href="project-detail-5.html" class="text-decoration-none text-dark">Thi công hệ thống điện cho Series tàu FCS 2710, 3307, tàu cá Úc, tàu hút bùn, tàu Serco,... </a>
+                                    <a href="project-detail-5.html" class="text-decoration-none text-dark">Thi công hệ
+                                        thống điện cho Series tàu FCS 2710, 3307, tàu cá Úc, tàu hút bùn, tàu Serco,...
+                                    </a>
                                 </h5>
                                 <p class="small text-muted mb-1">
-                                    <i class="fa-solid fa-location-dot me-1"></i> Nhà máy đóng tàu 189, Đình Vũ, Hải Phòng.
+                                    <i class="fa-solid fa-location-dot me-1"></i> Nhà máy đóng tàu 189, Đình Vũ, Hải
+                                    Phòng.
                                 </p>
                             </div>
                         </div>
@@ -451,7 +564,8 @@
                             <div class="p-3 bg-white">
                                 <span class="badge bg-secondary mb-2">M&E</span>
                                 <h5 class="fw-bold">
-                                    <a href="project-detail-6.html" class="text-decoration-none text-dark">Thi công hệ thống điện Dự án "Kho chứa 1 triệu tấn LNG Thị Vải" </a>
+                                    <a href="project-detail-6.html" class="text-decoration-none text-dark">Thi công hệ
+                                        thống điện Dự án "Kho chứa 1 triệu tấn LNG Thị Vải" </a>
                                 </h5>
                                 <p class="small text-muted mb-1">
                                     <i class="fa-solid fa-location-dot me-1"></i> - KCN Cải Mép, Vũng Tàu
@@ -733,7 +847,8 @@
                             <div class="card-body p-4">
                                 <small class="text-muted"><i class="fa-regular fa-calendar me-1"></i> 10/02/2026 | An
                                     toàn</small>
-                                <h5 class="fw-bold mt-2"><a href="news-3.html" class="text-decoration-none text-dark">Tiêu
+                                <h5 class="fw-bold mt-2"><a href="news-3.html"
+                                        class="text-decoration-none text-dark">Tiêu
                                         Chuẩn An Toàn Trong Thi Công Đấu Nối Điện</a></h5>
                                 <p class="text-muted small">Quy trình nghiêm ngặt nhằm đảm bảo tuyệt đối an toàn lao
                                     động trong công tác thi công...</p>
@@ -852,6 +967,11 @@
             });
         });
     </script>
+    <script>
+    function updateLightbox(imageSrc) {
+        document.getElementById('lightboxImage').src = imageSrc;
+    }
+</script>
 </body>
 
 </html>
