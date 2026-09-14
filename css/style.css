@@ -210,33 +210,29 @@ h1, h2, h3, h4, h5, h6, .fw-bold {
     background-color: #e0a800;
     border-color: #d39e00;
 }
-/* Khung chứa Logo */
+/* Khung chứa logo cố định kích thước và căn giữa */
 .partner-logo-box {
+    height: 90px;
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 90px; /* Cố định chiều cao khung */
-    transition: all 0.3s ease;
+    overflow: hidden;
+    transition: transform 0.3s ease, shadow 0.3s ease;
 }
 
-.partner-logo-box:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1) !important;
-}
-
-/* Ảnh Logo */
+/* Ép ảnh vừa vặn trong khung viền mà không bị méo */
 .partner-img {
-    max-height: 80px; /* Khống chế chiều cao ảnh logo cho đồng đều */
-    max-width: 85%;
+    max-height: 150%;
+    max-width: 150%;
+    width: auto;
+    height: auto;
     object-fit: contain;
-    
-    opacity: 0.7;
-    transition: all 0.3s ease;
 }
 
-.partner-logo-box:hover .partner-img {
-    filter: grayscale(0%); /* Hiện màu nguyên bản khi rê chuột vào */
-    opacity: 1;
+/* Hiệu ứng phóng nhẹ khi di chuột (tùy chọn) */
+.partner-logo-box:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
 }
 /* Styling cho các thẻ dịch vụ */
 .service-card {
