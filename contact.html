@@ -8,6 +8,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
     
     <style>
         /* CSS TỔNG HỢP */
@@ -96,29 +98,271 @@
         #submitBtn {
             transition: all 0.3s ease;
         }
+        /* --- BẮT ĐẦU: BỔ SUNG MAGIC NAVIGATION (Desktop) --- */
+@media (min-width: 992px) {
+    .magic-nav {
+        position: relative;
+        display: flex;
+        background: var(--dark-bg); /* Nền tối cho thanh menu */
+        border-radius: 20px;
+        height: 70px;
+        padding: 0 10px;
+        align-items: center;
+        margin-top: 15px; /* Tạo khoảng trống phía trên cho icon nảy lên */
+    }
+
+    .magic-nav .nav-item {
+        position: relative;
+        list-style: none;
+        height: 70px;
+        z-index: 2;
+        padding: 0 15px; /* Giúp các mục co giãn theo độ dài chữ */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .magic-nav .nav-link {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        width: 100%;
+        height: 100%;
+        text-decoration: none;
+        padding: 0 !important; /* Ghi đè padding cũ */
+    }
+
+    .magic-nav .icon {
+        position: relative;
+        display: block;
+        line-height: 70px;
+        font-size: 1.5em;
+        text-align: center;
+        transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        color: rgba(255, 255, 255, 0.6);
+    }
+
+    /* Khi active, icon trồi lên */
+    .magic-nav .nav-item.active .icon {
+        transform: translateY(-32px);
+        color: #fff;
+    }
+
+    /* Chữ bên dưới icon */
+    .magic-nav .text {
+        position: absolute;
+        color: #fff;
+        font-weight: 600;
+        font-size: 0.75rem;
+        letter-spacing: 0.05em;
+        transition: 0.5s;
+        opacity: 0;
+        transform: translateY(20px);
+        white-space: nowrap; /* Giữ chữ trên 1 dòng */
+    }
+
+    /* Khi active, chữ hiện lên */
+    .magic-nav .nav-item.active .text {
+        opacity: 1;
+        transform: translateY(16px);
+    }
+
+    /* Thanh trượt Indicator */
+    .indicator {
+        position: absolute;
+        top: -20px; /* Nhô lên trên một chút */
+        height: 60px;
+        background: var(--accent-yellow); 
+        border-radius: 30px;
+        border: 6px solid var(--dark-bg); /* Viền tạo cảm giác cắt lõm */
+        transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        z-index: 1;
+    }
+
+    /* Góc bo lõm bên trái */
+    .indicator::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: -20px;
+        width: 15px;
+        height: 15px;
+        background: transparent;
+        border-top-right-radius: 15px;
+        box-shadow: 1px -8px 0 0 var(--dark-bg);
+    }
+
+    /* Góc bo lõm bên phải */
+    .indicator::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        right: -20px;
+        width: 15px;
+        height: 15px;
+        background: transparent;
+        border-top-left-radius: 15px;
+        box-shadow: -1px -8px 0 0 var(--dark-bg);
+    }
+    
+    /* Hiệu ứng Glow ánh sáng màu mờ phía sau icon */
+    .magic-nav .nav-item .icon::before {
+        content: '';
+        position: absolute;
+        top: 15px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 35px;
+        height: 35px;
+        background: var(--clr); 
+        border-radius: 50%;
+        filter: blur(12px);
+        opacity: 0;
+        transition: opacity 0.5s ease, transform 0.5s ease;
+        z-index: -1;
+    }
+    .magic-nav .nav-item.active .icon::before {
+        opacity: 0.8;
+        transform: translateX(-50%) scale(1.2);
+    }
+}
+
+/* --- XỬ LÝ RESPONSIVE (MOBILE) --- 
+   Trên điện thoại sẽ tắt magic effect, chuyển về dạng list chuẩn Bootstrap */
+@media (max-width: 991px) {
+    .indicator { display: none; }
+    .magic-nav .icon { display: none; } /* Ẩn icon trên mobile cho gọn */
+    .magic-nav .text {
+        position: relative;
+        opacity: 1;
+        transform: none;
+        font-size: 0.95rem;
+        color: var(--text-dark);
+    }
+    .magic-nav .nav-item {
+        padding: 10px 0;
+        border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+    .magic-nav .nav-item.active .text {
+        color: var(--accent-yellow) !important;
+    }
+}
+:root {
+            --accent-yellow: #feca57; /* Màu vàng */
+            --secondary-blue: #48dbfb; /* Màu xanh dương nhạt */
+            --accent-orange: #ff9f43; /* Màu cam */
+           
+        }
+        /* HIỆU ỨNG TƯƠNG TÁC CHO NÚT "NHẬN TƯ VẤN" */
+    .btn-yellow {
+        background-color: var(--accent-yellow, #feca57);
+        color: var(--dark-bg, #1a202c) !important;
+        border: none;
+        border-radius: 30px; /* Bo tròn để đồng bộ với menu */
+        position: relative;
+        overflow: hidden;
+        z-index: 1;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        box-shadow: 0 4px 15px rgba(254, 202, 87, 0.3); /* Quầng sáng mờ ban đầu */
+    }
+
+    /* Tạo dải ánh sáng trắng ảo chờ sẵn bên ngoài nút */
+    .btn-yellow::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.7), transparent);
+        transition: left 0.6s ease;
+        z-index: -1;
+    }
+
+    /* Khi di chuột vào nút */
+    .btn-yellow:hover {
+        transform: translateY(-4px); /* Nút nảy nhẹ lên */
+        box-shadow: 0 10px 25px rgba(254, 202, 87, 0.7); /* Quầng sáng rực lên */
+    }
+
+    /* Dải ánh sáng trắng lướt quét ngang qua nút */
+    .btn-yellow:hover::before {
+        left: 100%;
+    }
+/* --- KẾT THÚC: BỔ SUNG MAGIC NAVIGATION --- */
     </style>
 </head>
 <body>
-    <!-- HEADER -->
+   <!-- Header & Navigation -->
     <header class="site-header fixed-top" id="header">
         <nav class="navbar navbar-expand-lg navbar-dark bg-header-custom">
             <div class="container">
-                <a class="navbar-brand" href="index.html"><img src="img/LOGO ASIAN.png" alt="ASIAN Logo" class="logo-img"></a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain">
+                <a class="navbar-brand" href="index.html">
+                    <img src="img/LOGO ASIAN.png" alt="ASIAN - THE POWER OF ASIAN JSC Logo" class="logo-img"
+                        id="main-logo">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain"
+                    aria-controls="navbarMain" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
+
                 <div class="collapse navbar-collapse" id="navbarMain">
-                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0 fw-semibold text-uppercase">
-                        <li class="nav-item"><a class="nav-link" href="index.html">TRANG CHỦ</a></li>
-                        <li class="nav-item"><a class="nav-link" href="about.html">GIỚI THIỆU</a></li>
-                        <li class="nav-item"><a class="nav-link" href="services.html">LĨNH VỰC HOẠT ĐỘNG</a></li>
-                        <li class="nav-item"><a class="nav-link" href="projects.html">DỰ ÁN</a></li>
-                        <li class="nav-item"><a class="nav-link active" href="contact.html">LIÊN HỆ</a></li>
+                    <!-- BẮT ĐẦU: MAGIC NAVIGATION TÙY CHỈNH -->
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0 fw-semibold text-uppercase magic-nav">
+                        <!-- data-clr là biến màu sắc để đổi màu ánh sáng khi click vào từng mục -->
+                        <li class="nav-item" data-clr="var(--accent-yellow)">
+                            <a class="nav-link" href="index.html">
+                                <span class="icon"><ion-icon name="home-outline"></ion-icon></span>
+                                <span class="text">TRANG CHỦ</span>
+                            </a>
+                        </li>
+                        <li class="nav-item" data-clr="var(--secondary-blue)">
+                            <a class="nav-link" href="about.html">
+                                <span class="icon"><ion-icon name="information-circle-outline"></ion-icon></span>
+                                <span class="text">GIỚI THIỆU</span>
+                            </a>
+                        </li>
+                        <li class="nav-item" data-clr="var(--accent-yellow)">
+                            <a class="nav-link" href="services.html">
+                                <span class="icon"><ion-icon name="briefcase-outline"></ion-icon></span>
+                                <span class="text">LĨNH VỰC HOẠT ĐỘNG</span>
+                            </a>
+                        </li>
+                        <li class="nav-item" data-clr="var(--accent-orange)">
+                            <a class="nav-link" href="projects.html">
+                                <span class="icon"><ion-icon name="construct-outline"></ion-icon></span>
+                                <span class="text">DỰ ÁN</span>
+                            </a>
+                        </li>
+                        <li class="nav-item" data-clr="#05c46b">
+                            <a class="nav-link" href="news.html">
+                                <span class="icon"><ion-icon name="newspaper-outline"></ion-icon></span>
+                                <span class="text">TIN TỨC</span>
+                            </a>
+                        </li>
+                        <li class="nav-item active" data-clr="#0fbcf9">
+                            <a class="nav-link" href="contact.html">
+                                <span class="icon"><ion-icon name="call-outline"></ion-icon></span>
+                                <span class="text">LIÊN HỆ</span>
+                            </a>
+                        </li>
+                        
+                        <!-- Cục bo tròn trượt qua lại (Indicator) -->
+                        <div class="indicator" id="navIndicator"></div>
                     </ul>
+                    <!-- KẾT THÚC: MAGIC NAVIGATION TÙY CHỈNH -->
+
+                    <div class="ms-lg-4 mt-3 mt-lg-0 text-center text-lg-start">
+                        <a href="contact.html" class="btn btn-yellow text-dark fw-bold px-4 py-2 text-uppercase">NHẬN TƯ VẤN</a>
+                    </div>
                 </div>
             </div>
         </nav>
     </header>
+
 
     <!-- MAIN CONTENT -->
     <main class="page-padding">
@@ -338,5 +582,73 @@
             }
         });
     </script>
+    <script>
+        function updateLightbox(imageSrc) {
+            document.getElementById('lightboxImage').src = imageSrc;
+        }
+    </script>
+    <script>
+document.addEventListener("DOMContentLoaded", function() {
+    // Chỉ kích hoạt hiệu ứng JS trên màn hình PC (>= 992px)
+    if(window.innerWidth >= 992) {
+        const magicNav = document.querySelector('.magic-nav');
+        const navItems = document.querySelectorAll('.magic-nav .nav-item');
+        const indicator = document.getElementById('navIndicator');
+
+        // LƯU Ý MỚI: Ghi nhớ mục (trang) đang được kích hoạt mặc định ban đầu
+        let defaultActiveItem = document.querySelector('.magic-nav .nav-item.active');
+
+        function moveIndicator(item) {
+            // Lấy vị trí trái và chiều rộng thực tế của thẻ LI đang tương tác
+            const leftPos = item.offsetLeft;
+            const itemWidth = item.offsetWidth;
+            
+            // Ép kích thước cục thanh trượt bằng đúng vị trí đó
+            indicator.style.left = leftPos + 'px';
+            indicator.style.width = itemWidth + 'px';
+
+            // Lấy màu từ biến data-clr để đổi màu Indicator và Glow tự động
+            const clr = item.getAttribute('data-clr');
+            if(clr) {
+                indicator.style.backgroundColor = clr;
+                item.style.setProperty('--clr', clr); 
+            }
+        }
+
+        // 1. SỰ KIỆN KHI DI CHUỘT VÀO TỪNG MỤC (Thay vì click)
+        navItems.forEach(item => {
+            item.addEventListener('mouseenter', function() {
+                navItems.forEach(nav => nav.classList.remove('active'));
+                this.classList.add('active');
+                
+                moveIndicator(this);
+            });
+        });
+
+        // 2. SỰ KIỆN KHI RỜI CHUỘT KHỎI TOÀN BỘ MENU
+        // Tự động trả Indicator về lại trang mặc định ban đầu
+        magicNav.addEventListener('mouseleave', function() {
+            if(defaultActiveItem) {
+                navItems.forEach(nav => nav.classList.remove('active'));
+                defaultActiveItem.classList.add('active');
+                moveIndicator(defaultActiveItem);
+            }
+        });
+
+        // Setup vị trí lúc trang vừa load xong
+        if(defaultActiveItem) {
+            setTimeout(() => moveIndicator(defaultActiveItem), 150); // Chờ xíu để CSS render chuẩn
+        }
+
+        // Setup lại vị trí nếu người dùng resize cửa sổ thu phóng
+        window.addEventListener('resize', () => {
+            if(window.innerWidth >= 992) {
+                const currentActive = document.querySelector('.magic-nav .nav-item.active');
+                if(currentActive) moveIndicator(currentActive);
+            }
+        });
+    }
+});
+</script>
 </body>
 </html>

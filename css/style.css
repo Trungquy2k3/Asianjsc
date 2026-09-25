@@ -1,3 +1,20 @@
+/* ==========================================================================
+   MỤC LỤC CSS
+   01. Biến cục bộ (Variables) & Font chữ toàn cục
+   02. Các class tiện ích (Utilities & Colors)
+   03. Header & Navigation (Thanh điều hướng)
+   04. Hero Section (Phần biểu ngữ chính)
+   05. Service Section (Phần dịch vụ)
+   06. Project Section (Phần dự án)
+   07. Partner Section (Đối tác)
+   08. News Section (Tin tức & Phân trang)
+   09. Process Section (Quy trình)
+   10. Footer Section (Chân trang)
+   ========================================================================== */
+
+/* ==========================================================================
+   01. BIẾN CỤC BỘ & FONT CHỮ TOÀN CỤC
+   ========================================================================== */
 /* Custom Variable Palette based on Asian Brand Identity */
 :root {
     --primary-blue: #0a2540;
@@ -22,6 +39,56 @@ h1, h2, h3, h4, h5, h6, .fw-bold {
     font-family: var(--font-heading);
 }
 
+/* ==========================================================================
+   02. CÁC CLASS TIỆN ÍCH (UTILITIES & COLORS)
+   ========================================================================== */
+/* Color Classes */
+.bg-dark-custom { background-color: var(--dark-bg); }
+.text-yellow { color: var(--accent-yellow) !important; }
+.bg-yellow { background-color: var(--accent-yellow) !important; }
+
+/* Page Spacing */
+.page-padding {
+    padding-top: 80px;
+}
+
+/* Z-index utility */
+.z-index-2 { z-index: 2; }
+
+/* Line tiêu đề */
+.title-line {
+    width: 60px;
+    height: 3px;
+    background-color: var(--accent-yellow);
+    margin-top: 10px;
+}
+
+/* Nút Vàng (Buttons) 
+   *LƯU Ý: Khai báo này đang bị lặp lại trong code gốc. Phần khai báo dưới sẽ ghi đè phần trên. */
+.btn-yellow {
+    background-color: var(--accent-yellow);
+    border-color: var(--accent-yellow);
+    color: #000;
+}
+.btn-yellow:hover {
+    background-color: var(--accent-orange);
+    border-color: var(--accent-orange);
+    color: #fff;
+}
+
+/* Nút Vàng tư vấn/chi tiết (Khai báo lặp trong mã gốc) */
+.btn-yellow {
+    background-color: #ffc107;
+    border-color: #ffc107;
+}
+.btn-yellow:hover {
+    background-color: #e0a800;
+    border-color: #d39e00;
+}
+
+/* ==========================================================================
+   03. HEADER & NAVIGATION (THANH ĐIỀU HƯỚNG)
+   ========================================================================== */
 /* Header 2 mảng màu Chuyển tiếp */
 .bg-header-custom {
     /* Mảng 1: Xanh lá sáng | Mảng 2: Xanh lam / Xanh đậm */
@@ -54,29 +121,149 @@ h1, h2, h3, h4, h5, h6, .fw-bold {
 .nav-link:hover, .nav-link.active {
     color: var(--accent-yellow) !important;
 }
+/* Bổ sung từ Gemini*/
+/* --- BẮT ĐẦU: BỔ SUNG MAGIC NAVIGATION (Desktop) --- */
+@media (min-width: 992px) {
+    .magic-nav {
+        position: relative;
+        display: flex;
+        background: transparent; /* Nền tối cho thanh menu */
+        border-radius: 20px;
+        height: 70px;
+        padding: 0 60px;
+        align-items: center;
+        margin-top: 15px; /* Tạo khoảng trống phía trên cho icon nảy lên */
+    }
 
-/* Color Classes */
-.bg-dark-custom { background-color: var(--dark-bg); }
-.text-yellow { color: var(--accent-yellow) !important; }
-.bg-yellow { background-color: var(--accent-yellow) !important; }
-.btn-yellow {
-    background-color: var(--accent-yellow);
-    border-color: var(--accent-yellow);
-    color: #000;
-}
-.btn-yellow:hover {
-    background-color: var(--accent-orange);
-    border-color: var(--accent-orange);
-    color: #fff;
+    .magic-nav .nav-item {
+        position: relative;
+        list-style: none;
+        height: 70px;
+        z-index: 2;
+        padding: 0 15px; /* Giúp các mục co giãn theo độ dài chữ */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .magic-nav .nav-link {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        width: 100%;
+        height: 100%;
+        text-decoration: none;
+        padding: 0 !important; /* Ghi đè padding cũ */
+    }
+
+    .magic-nav .icon {
+        position: relative;
+        display: block;
+        line-height: 70px;
+        font-size: 1.5em;
+        text-align: center;
+        transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        color: rgba(255, 255, 255, 0.6);
+    }
+
+    /* Khi active, icon trồi lên */
+    .magic-nav .nav-item.active .icon {
+        transform: translateY(-32px);
+        color: #fff;
+    }
+
+    /* Chữ bên dưới icon */
+    .magic-nav .text {
+        position: absolute;
+        color: #fff;
+        font-weight: 600;
+        font-size: 0.75rem;
+        letter-spacing: 0.05em;
+        transition: 0.5s;
+        opacity: 0;
+        transform: translateY(20px);
+        white-space: nowrap; /* Giữ chữ trên 1 dòng */
+    }
+
+    /* Khi active, chữ hiện lên */
+    .magic-nav .nav-item.active .text {
+        opacity: 1;
+        transform: translateY(16px);
+    }
+
+    /* Thanh trượt Indicator */
+    .indicator {
+        position: absolute;
+        top: -15px; /* Chỉnh lại top một chút cho cân đối vì đã bỏ viền */
+        height: 50px; /* Giảm chiều cao xuống một chút vì đã bỏ viền */
+        background: var(--accent-yellow); 
+        border-radius: 30px;
+        /* ĐÃ XÓA DÒNG BORDER Ở ĐÂY */
+        transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        z-index: 1;
+    }
+
+    /* Góc bo lõm bên trái */
+    .indicator::before {
+        display: none; /* THÊM DÒNG NÀY ĐỂ ẨN GÓC LÕM */
+        /* ... các dòng cũ giữ nguyên hoặc xóa đi đều được ... */
+    }
+
+    /* Góc bo lõm bên phải */
+    .indicator::after {
+        display: none; /* THÊM DÒNG NÀY ĐỂ ẨN GÓC LÕM */
+        /* ... các dòng cũ giữ nguyên hoặc xóa đi đều được ... */
+    }
+    
+    /* Hiệu ứng Glow ánh sáng màu mờ phía sau icon */
+    .magic-nav .nav-item .icon::before {
+        content: '';
+        position: absolute;
+        top: 15px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 35px;
+        height: 35px;
+        background: var(--clr); 
+        border-radius: 50%;
+        filter: blur(12px);
+        opacity: 0;
+        transition: opacity 0.5s ease, transform 0.5s ease;
+        z-index: -1;
+    }
+    .magic-nav .nav-item.active .icon::before {
+        opacity: 0.8;
+        transform: translateX(-50%) scale(1.2);
+    }
 }
 
-.title-line {
-    width: 60px;
-    height: 3px;
-    background-color: var(--accent-yellow);
-    margin-top: 10px;
+/* --- XỬ LÝ RESPONSIVE (MOBILE) --- 
+   Trên điện thoại sẽ tắt magic effect, chuyển về dạng list chuẩn Bootstrap */
+@media (max-width: 991px) {
+    .indicator { display: none; }
+    .magic-nav .icon { display: none; } /* Ẩn icon trên mobile cho gọn */
+    .magic-nav .text {
+        position: relative;
+        opacity: 1;
+        transform: none;
+        font-size: 0.95rem;
+        color: var(--text-dark);
+    }
+    .magic-nav .nav-item {
+        padding: 10px 0;
+        border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+    .magic-nav .nav-item.active .text {
+        color: var(--accent-yellow) !important;
+    }
 }
-
+/* --- KẾT THÚC: BỔ SUNG MAGIC NAVIGATION --- */
+/* ==========================================================================
+   04. HERO SECTION (PHẦN BIỂU NGỮ CHÍNH)
+   ========================================================================== */
 /* Hero Section Styling */
 .hero-section {
     min-height: 100vh;
@@ -91,9 +278,11 @@ h1, h2, h3, h4, h5, h6, .fw-bold {
     background: linear-gradient(135deg, rgba(10, 37, 64, 0.88) 0%, rgba(13, 27, 42, 0.7) 100%);
 }
 
-.z-index-2 { z-index: 2; }
-
-/* Service Card Hover */
+/* ==========================================================================
+   05. SERVICE SECTION (PHẦN DỊCH VỤ)
+   ========================================================================== */
+/* Service Card Hover 
+   *LƯU Ý: Có 2 khai báo .service-card bị lặp/chồng trong mã gốc */
 .service-card {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
@@ -102,35 +291,59 @@ h1, h2, h3, h4, h5, h6, .fw-bold {
     box-shadow: 0 12px 24px rgba(0,0,0,0.15) !important;
 }
 
+/* Styling cho các thẻ dịch vụ (Khai báo lặp trong mã gốc) */
+.service-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.service-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12) !important;
+}
+
+/* Xử lý ảnh trong thẻ Service (Có 2 kiểu class wrapper) */
 .card-img-wrapper {
     height: 200px;
     overflow: hidden;
 }
-
 .card-img-wrapper img {
     height: 100%;
     width: 100%;
     object-fit: cover;
     transition: transform 0.5s ease;
 }
-
 .service-card:hover .card-img-wrapper img {
     transform: scale(1.08);
 }
 
-/* Project Cards */
+/* Khung ảnh và hiệu ứng phóng to nhẹ khi hover (Kiểu class wrapper thứ 2) */
+.service-img-box {
+    height: 200px;
+}
+.service-img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+.service-card:hover .service-img {
+    transform: scale(1.08);
+}
+
+/* ==========================================================================
+   06. PROJECT SECTION (PHẦN DỰ ÁN)
+   ========================================================================== */
+/* Project Cards 
+   *LƯU Ý: Khai báo ảnh và overlay của Project bị lặp và ghi đè nhau trong mã gốc */
 .project-img-box {
     height: 240px;
     overflow: hidden;
 }
-
 .project-img-box img {
     height: 100%;
     width: 100%;
     object-fit: cover;
     transition: transform 0.4s ease;
 }
-
 .project-overlay {
     position: absolute;
     top: 0; left: 0; right: 0; bottom: 0;
@@ -138,53 +351,23 @@ h1, h2, h3, h4, h5, h6, .fw-bold {
     opacity: 0;
     transition: opacity 0.3s ease;
 }
-
 .project-card:hover .project-overlay {
     opacity: 1;
 }
-
 .project-card:hover .project-img-box img {
     transform: scale(1.1);
 }
 
-/* Process Step Numbers */
-.process-num {
-    width: 45px;
-    height: 45px;
-    line-height: 45px;
-    font-weight: bold;
-    font-size: 1.1rem;
-}
-
-/* Page Spacing */
-.page-padding {
-    padding-top: 80px;
-}
-
-/* Footer Links */
-.footer-links a {
-    color: rgba(255, 255, 255, 0.75);
-    text-decoration: none;
-    line-height: 2;
-    transition: color 0.2s ease;
-}
-
-.footer-links a:hover {
-    color: var(--accent-yellow);
-}
-/* Hiệu ứng hiển thị nút "Chi Tiết" khi di chuột vào ảnh */
+/* Hiệu ứng hiển thị nút "Chi Tiết" khi di chuột vào ảnh (Khai báo lặp trong mã gốc) */
 .project-img-box {
     overflow: hidden;
 }
-
 .project-img-box img {
     transition: transform 0.3s ease;
 }
-
 .project-card:hover .project-img-box img {
     transform: scale(1.05);
 }
-
 .project-overlay {
     position: absolute;
     top: 0;
@@ -195,21 +378,13 @@ h1, h2, h3, h4, h5, h6, .fw-bold {
     opacity: 0;
     transition: opacity 0.3s ease;
 }
-
 .project-card:hover .project-overlay {
     opacity: 1;
 }
 
-/* Nút Vàng tư vấn/chi tiết */
-.btn-yellow {
-    background-color: #ffc107;
-    border-color: #ffc107;
-}
-
-.btn-yellow:hover {
-    background-color: #e0a800;
-    border-color: #d39e00;
-}
+/* ==========================================================================
+   07. PARTNER SECTION (ĐỐI TÁC)
+   ========================================================================== */
 /* Khung chứa logo cố định kích thước và căn giữa */
 .partner-logo-box {
     height: 90px;
@@ -234,32 +409,10 @@ h1, h2, h3, h4, h5, h6, .fw-bold {
     transform: translateY(-3px);
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
 }
-/* Styling cho các thẻ dịch vụ */
-.service-card {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
 
-.service-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12) !important;
-}
-
-/* Khung ảnh và hiệu ứng phóng to nhẹ khi hover */
-.service-img-box {
-    height: 200px;
-}
-
-.service-img {
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
-    transition: transform 0.4s ease;
-}
-
-.service-card:hover .service-img {
-    transform: scale(1.08);
-}
-
+/* ==========================================================================
+   08. NEWS SECTION (TIN TỨC & PHÂN TRANG)
+   ========================================================================== */
 /* Card Tin Tức */
 .news-card {
     border-radius: 12px;
@@ -321,3 +474,108 @@ h1, h2, h3, h4, h5, h6, .fw-bold {
     background-color: var(--bs-primary);
     color: #ffffff;
 }
+
+/* ==========================================================================
+   09. PROCESS SECTION (QUY TRÌNH)
+   ========================================================================== */
+/* Process Step Numbers */
+.process-num {
+    width: 45px;
+    height: 45px;
+    line-height: 45px;
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+/* ==========================================================================
+   10. FOOTER SECTION (CHÂN TRANG)
+   ========================================================================== */
+/* Footer Links */
+.footer-links a {
+    color: rgba(255, 255, 255, 0.75);
+    text-decoration: none;
+    line-height: 2;
+    transition: color 0.2s ease;
+}
+
+.footer-links a:hover {
+    color: var(--accent-yellow);
+}
+/* HIỆU ỨNG TƯƠNG TÁC CHO NÚT "NHẬN TƯ VẤN" */
+    .btn-yellow {
+        background-color: var(--accent-yellow, #feca57);
+        color: var(--dark-bg, #1a202c) !important;
+        border: none;
+        border-radius: 30px; /* Bo tròn để đồng bộ với menu */
+        position: relative;
+        overflow: hidden;
+        z-index: 1;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        box-shadow: 0 4px 15px rgba(254, 202, 87, 0.3); /* Quầng sáng mờ ban đầu */
+    }
+
+    /* Tạo dải ánh sáng trắng ảo chờ sẵn bên ngoài nút */
+    .btn-yellow::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.7), transparent);
+        transition: left 0.6s ease;
+        z-index: -1;
+    }
+
+    /* Khi di chuột vào nút */
+    .btn-yellow:hover {
+        transform: translateY(-4px); /* Nút nảy nhẹ lên */
+        box-shadow: 0 10px 25px rgba(254, 202, 87, 0.7); /* Quầng sáng rực lên */
+    }
+
+    /* Dải ánh sáng trắng lướt quét ngang qua nút */
+    .btn-yellow:hover::before {
+        left: 100%;
+    }
+    /* Css cho phần section 4 */
+    /* --- KIỂU DÁNG CHO CỤM NÚT LỌC DỰ ÁN --- */
+    #project-filters {
+        position: relative;
+        z-index: 1;
+    }
+
+    #project-filters .btn {
+        border-radius: 30px; /* Bo tròn như viên thuốc */
+        padding: 8px 25px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+        color: var(--text-dark, #333);
+        border: 2px solid #e2e8f0; /* Viền xám nhạt mặc định */
+        background: #fff;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    #project-filters .btn:hover {
+        border-color: var(--secondary-blue, #48dbfb);
+        color: var(--secondary-blue, #48dbfb);
+        transform: translateY(-3px);
+        background: #fff;
+    }
+
+    #project-filters .btn.active {
+        background: var(--secondary-blue, #48dbfb);
+        color: #fff !important;
+        border-color: var(--secondary-blue, #48dbfb);
+        box-shadow: 0 6px 18px rgba(72, 219, 251, 0.4); /* Quầng sáng khi được chọn */
+        transform: translateY(0);
+    }
+
+    /* Hiệu ứng mờ dần khi lọc phần tử */
+    @keyframes fadeScale {
+        from { opacity: 0; transform: scale(0.95); }
+        to { opacity: 1; transform: scale(1); }
+    }
+    .project-item.show-project {
+        animation: fadeScale 0.4s ease-out forwards;
+    }

@@ -133,6 +133,9 @@
         }
     </style>
     <meta name="google-site-verification" content="wgN62Q0rta93bzO-G8W3Fu-X6Go8D75ux9pGVQHJXeU" />
+    <!-- Thư viện Ionicons cho Magic Navigation -->
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </head>
 
 <body>
@@ -151,16 +154,52 @@
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarMain">
-                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0 fw-semibold text-uppercase">
-                        <li class="nav-item"><a class="nav-link active" href="index.html">TRANG CHỦ</a></li>
-                        <li class="nav-item"><a class="nav-link" href="about.html">GIỚI THIỆU</a></li>
-                        <li class="nav-item"><a class="nav-link" href="services.html">LĨNH VỰC HOẠT ĐỘNG</a></li>
-                        <li class="nav-item"><a class="nav-link" href="projects.html">DỰ ÁN</a></li>
-                        <li class="nav-item"><a class="nav-link" href="news.html">TIN TỨC</a></li>
+                    <!-- BẮT ĐẦU: MAGIC NAVIGATION TÙY CHỈNH -->
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0 fw-semibold text-uppercase magic-nav">
+                        <!-- data-clr là biến màu sắc để đổi màu ánh sáng khi click vào từng mục -->
+                        <li class="nav-item active" data-clr="var(--accent-yellow)">
+                            <a class="nav-link" href="index.html">
+                                <span class="icon"><ion-icon name="home-outline"></ion-icon></span>
+                                <span class="text">TRANG CHỦ</span>
+                            </a>
+                        </li>
+                        <li class="nav-item" data-clr="var(--secondary-blue)">
+                            <a class="nav-link" href="about.html">
+                                <span class="icon"><ion-icon name="information-circle-outline"></ion-icon></span>
+                                <span class="text">GIỚI THIỆU</span>
+                            </a>
+                        </li>
+                        <li class="nav-item" data-clr="var(--accent-yellow)">
+                            <a class="nav-link" href="services.html">
+                                <span class="icon"><ion-icon name="briefcase-outline"></ion-icon></span>
+                                <span class="text">LĨNH VỰC HOẠT ĐỘNG</span>
+                            </a>
+                        </li>
+                        <li class="nav-item" data-clr="var(--accent-orange)">
+                            <a class="nav-link" href="projects.html">
+                                <span class="icon"><ion-icon name="construct-outline"></ion-icon></span>
+                                <span class="text">DỰ ÁN</span>
+                            </a>
+                        </li>
+                        <li class="nav-item" data-clr="#05c46b">
+                            <a class="nav-link" href="news.html">
+                                <span class="icon"><ion-icon name="newspaper-outline"></ion-icon></span>
+                                <span class="text">TIN TỨC</span>
+                            </a>
+                        </li>
+                        <li class="nav-item" data-clr="#0fbcf9">
+                            <a class="nav-link" href="contact.html">
+                                <span class="icon"><ion-icon name="call-outline"></ion-icon></span>
+                                <span class="text">LIÊN HỆ</span>
+                            </a>
+                        </li>
 
-                        <li class="nav-item"><a class="nav-link" href="contact.html">LIÊN HỆ</a></li>
+                        <!-- Cục bo tròn trượt qua lại (Indicator) -->
+                        <div class="indicator" id="navIndicator"></div>
                     </ul>
-                    <div class="ms-lg-3">
+                    <!-- KẾT THÚC: MAGIC NAVIGATION TÙY CHỈNH -->
+
+                    <div class="ms-lg-4 mt-3 mt-lg-0 text-center text-lg-start">
                         <a href="contact.html" class="btn btn-yellow text-dark fw-bold px-4 py-2 text-uppercase">NHẬN TƯ
                             VẤN</a>
                     </div>
@@ -1130,6 +1169,106 @@
         function updateLightbox(imageSrc) {
             document.getElementById('lightboxImage').src = imageSrc;
         }
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Chỉ kích hoạt hiệu ứng JS trên màn hình PC (>= 992px)
+            if (window.innerWidth >= 992) {
+                const magicNav = document.querySelector('.magic-nav');
+                const navItems = document.querySelectorAll('.magic-nav .nav-item');
+                const indicator = document.getElementById('navIndicator');
+
+                // LƯU Ý MỚI: Ghi nhớ mục (trang) đang được kích hoạt mặc định ban đầu
+                let defaultActiveItem = document.querySelector('.magic-nav .nav-item.active');
+
+                function moveIndicator(item) {
+                    // Lấy vị trí trái và chiều rộng thực tế của thẻ LI đang tương tác
+                    const leftPos = item.offsetLeft;
+                    const itemWidth = item.offsetWidth;
+
+                    // Ép kích thước cục thanh trượt bằng đúng vị trí đó
+                    indicator.style.left = leftPos + 'px';
+                    indicator.style.width = itemWidth + 'px';
+
+                    // Lấy màu từ biến data-clr để đổi màu Indicator và Glow tự động
+                    const clr = item.getAttribute('data-clr');
+                    if (clr) {
+                        indicator.style.backgroundColor = clr;
+                        item.style.setProperty('--clr', clr);
+                    }
+                }
+
+                // 1. SỰ KIỆN KHI DI CHUỘT VÀO TỪNG MỤC (Thay vì click)
+                navItems.forEach(item => {
+                    item.addEventListener('mouseenter', function () {
+                        navItems.forEach(nav => nav.classList.remove('active'));
+                        this.classList.add('active');
+
+                        moveIndicator(this);
+                    });
+                });
+
+                // 2. SỰ KIỆN KHI RỜI CHUỘT KHỎI TOÀN BỘ MENU
+                // Tự động trả Indicator về lại trang mặc định ban đầu
+                magicNav.addEventListener('mouseleave', function () {
+                    if (defaultActiveItem) {
+                        navItems.forEach(nav => nav.classList.remove('active'));
+                        defaultActiveItem.classList.add('active');
+                        moveIndicator(defaultActiveItem);
+                    }
+                });
+
+                // Setup vị trí lúc trang vừa load xong
+                if (defaultActiveItem) {
+                    setTimeout(() => moveIndicator(defaultActiveItem), 150); // Chờ xíu để CSS render chuẩn
+                }
+
+                // Setup lại vị trí nếu người dùng resize cửa sổ thu phóng
+                window.addEventListener('resize', () => {
+                    if (window.innerWidth >= 992) {
+                        const currentActive = document.querySelector('.magic-nav .nav-item.active');
+                        if (currentActive) moveIndicator(currentActive);
+                    }
+                });
+            }
+        });
+    </script>
+    <!-- Script cho phần lọc dự án -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const filterBtns = document.querySelectorAll('#project-filters .btn');
+
+            // Giả định bạn có các thẻ chứa dự án bên dưới mang class '.project-item' 
+            // và có thuộc tính 'data-category' tương ứng với các nút (VD: data-category="dien-luc")
+            const projectItems = document.querySelectorAll('.project-item');
+
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', function () {
+                    // 1. Chuyển đổi trạng thái Active của nút
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+
+                    // 2. Lấy giá trị bộ lọc
+                    const filterValue = this.getAttribute('data-filter');
+
+                    // 3. Lọc các dự án bên dưới (nếu có)
+                    if (projectItems.length > 0) {
+                        projectItems.forEach(item => {
+                            // Reset animation
+                            item.classList.remove('show-project');
+
+                            if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
+                                item.style.display = 'block'; // Hoặc 'flex', 'grid' tùy layout của bạn
+                                // Kích hoạt lại animation
+                                setTimeout(() => item.classList.add('show-project'), 10);
+                            } else {
+                                item.style.display = 'none';
+                            }
+                        });
+                    }
+                });
+            });
+        });
     </script>
 </body>
 
