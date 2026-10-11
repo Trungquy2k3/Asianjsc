@@ -1,0 +1,124 @@
+/* ==========================================================================
+   ANIMATIONS – hiệu ứng chuyển động cho website ASIAN
+   Nạp SAU style.css. Hiệu ứng "hiện khi cuộn" chỉ bật khi js/main.js chạy
+   (thẻ <html> có class .anim-ready) nên nếu JS lỗi, nội dung vẫn hiển thị.
+   ========================================================================== */
+:root {
+    --ease-out: cubic-bezier(.22, 1, .36, 1);
+    --ease-spring: cubic-bezier(.34, 1.56, .64, 1);
+}
+
+/* ---------- 1. HIỆN KHI CUỘN (scroll reveal) ---------- */
+.anim-ready [data-animate] {
+    opacity: 0;
+    transform: translate3d(var(--tx, 0), var(--ty, 36px), 0) scale(var(--ts, 1));
+    transition: opacity .85s var(--ease-out) var(--d, 0ms),
+                transform .85s var(--ease-out) var(--d, 0ms);
+    will-change: opacity, transform;
+}
+.anim-ready [data-animate="fade-right"] { --tx: -48px; --ty: 0; }
+.anim-ready [data-animate="fade-left"]  { --tx: 48px;  --ty: 0; }
+.anim-ready [data-animate="zoom-in"]    { --ty: 0; --ts: .86; }
+.anim-ready [data-animate="line"]       { opacity: 1; transform: scaleX(0); }
+.anim-ready [data-animate].is-visible   { opacity: 1; transform: none; }
+
+/* Đường gạch chân tiêu đề "vẽ" ra từ trái / giữa */
+.title-line { transform-origin: left center; }
+.title-line.mx-auto { transform-origin: center; }
+
+/* ---------- 2. HERO: vào cảnh lần lượt + nền zoom chậm ---------- */
+.hero-section { overflow: hidden; }
+.hero-section::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: inherit;
+    animation: heroZoom 22s ease-in-out infinite alternate;
+    will-change: transform;
+}
+@keyframes heroZoom { from { transform: scale(1); } to { transform: scale(1.12); } }
+
+.hero-section .col-lg-9 > * { animation: heroIn .9s var(--ease-out) both; }
+.hero-section .col-lg-9 > :nth-child(1) { animation-delay: .10s; }
+.hero-section .col-lg-9 > :nth-child(2) { animation-delay: .25s; }
+.hero-section .col-lg-9 > :nth-child(3) { animation-delay: .40s; }
+.hero-section .col-lg-9 > :nth-child(4) { animation-delay: .55s; }
+@keyframes heroIn {
+    from { opacity: 0; transform: translateY(34px); }
+    to   { opacity: 1; transform: none; }
+}
+/* Nút CTA chính "thở" nhẹ để thu hút chú ý */
+.hero-section .btn-yellow { animation: ctaPulse 2.8s ease-out 1.8s infinite; }
+@keyframes ctaPulse {
+    0%   { box-shadow: 0 4px 15px rgba(254, 202, 87, .3), 0 0 0 0 rgba(255, 209, 0, .55); }
+    70%  { box-shadow: 0 4px 15px rgba(254, 202, 87, .3), 0 0 0 16px rgba(255, 209, 0, 0); }
+    100% { box-shadow: 0 4px 15px rgba(254, 202, 87, .3), 0 0 0 0 rgba(255, 209, 0, 0); }
+}
+
+/* ---------- 3. HEADER: logo thu nhỏ khi cuộn ---------- */
+.logo-img { transition: height .35s var(--ease-out), transform .4s var(--ease-spring), filter .3s ease; }
+.site-header.scrolled .logo-img { height: 68px; }
+
+/* ---------- 4. THẺ (card) – hover sinh động ---------- */
+.service-card, .project-card, .news-card, .process-step-card {
+    transition: transform .45s var(--ease-spring), box-shadow .45s var(--ease-out), border-color .3s ease;
+}
+.service-card:hover { transform: translateY(-10px); box-shadow: 0 18px 36px rgba(10, 37, 64, .18) !important; }
+.project-card:hover { transform: translateY(-8px);  box-shadow: 0 18px 36px rgba(10, 37, 64, .20) !important; }
+.news-card:hover    { transform: translateY(-8px); }
+
+.card-img-wrapper img, .service-img, .project-img-box img, .news-img { transition: transform .8s var(--ease-out); }
+.service-card:hover .card-img-wrapper img, .service-card:hover .service-img { transform: scale(1.1); }
+.project-card:hover .project-img-box img { transform: scale(1.1); }
+
+/* Nút "Chi tiết" trượt lên khi rê chuột vào ảnh dự án */
+.project-overlay .btn {
+    opacity: 0;
+    transform: translateY(18px) scale(.92);
+    transition: transform .45s var(--ease-spring) .05s, opacity .35s ease .05s;
+}
+.project-card:hover .project-overlay .btn { opacity: 1; transform: none; }
+
+/* Icon dịch vụ nảy khi rê vào thẻ */
+.service-icon i { display: inline-block; }
+.service-card:hover .service-icon i { animation: iconWiggle .7s var(--ease-out); }
+@keyframes iconWiggle {
+    0%   { transform: scale(1) rotate(0); }
+    40%  { transform: scale(1.35) rotate(-12deg); }
+    70%  { transform: scale(.95) rotate(6deg); }
+    100% { transform: scale(1) rotate(0); }
+}
+
+/* Quy trình: icon bước xoay nhẹ + đường nối nét đứt "chạy" ra */
+.process-step-card:hover .step-icon-wrap { transform: scale(1.14) rotate(8deg); }
+@media (min-width: 992px) {
+    .anim-ready .process-timeline-wrapper .row::before {
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 1.6s var(--ease-out) .3s;
+    }
+    .anim-ready .process-timeline-wrapper.line-in .row::before { transform: scaleX(1); }
+}
+
+/* Logo đối tác */
+.partner-logo-box { transition: transform .35s var(--ease-spring), box-shadow .35s ease; }
+.partner-logo-box:hover { transform: translateY(-6px) scale(1.04); }
+
+/* ---------- 5. SỐ ĐẾM ---------- */
+.counter { display: inline-block; }
+.counter.counter-done { animation: counterPop .55s var(--ease-spring); }
+@keyframes counterPop { 0% { transform: scale(1); } 50% { transform: scale(1.25); } 100% { transform: scale(1); } }
+
+/* ---------- 6. LỌC DỰ ÁN: thẻ bật vào lần lượt ---------- */
+.filter-in { animation: filterIn .55s var(--ease-out) var(--d, 0ms) both; }
+@keyframes filterIn {
+    from { opacity: 0; transform: translateY(26px) scale(.95); }
+    to   { opacity: 1; transform: none; }
+}
+
+/* ---------- 7. Tôn trọng người dùng tắt chuyển động ---------- */
+@media (prefers-reduced-motion: reduce) {
+    .hero-section::before, .hero-section .btn-yellow { animation: none !important; }
+    .hero-section .col-lg-9 > *, .filter-in, .counter.counter-done { animation-duration: .01ms !important; animation-delay: 0s !important; }
+    .service-card, .project-card, .news-card, .process-step-card, .partner-logo-box { transition: none; }
+}

@@ -4,6 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/jpeg" href="img/icon%20asian.jpg">
     <title>Giới Thiệu | ASIAN - The Power of Asian</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
@@ -11,6 +15,7 @@
     <link rel="stylesheet" href="css/responsive.css">
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <link rel="stylesheet" href="css/animations.css">
 </head>
 
 <body>
@@ -128,7 +133,7 @@
                     <p><strong>Xin chân thành cảm ơn !</strong></p>
                 </div>
                 <div class="col-lg-6">
-                    <img src="img/ảnh thi công-1.jpg.png" alt="Tổng quan công ty" class="img-fluid rounded shadow">
+                    <img src="img/ảnh thi công-1.jpg.png" alt="Tổng quan công ty" class="img-fluid rounded shadow" loading="lazy" decoding="async">
                 </div>
             </div>
         </section>
@@ -155,7 +160,7 @@
                                     </p>
                                     <p> Số điện thoại: 0225 3578298 hoặc 02252244555</p>
                                     <p> Email: info@asianjsc.com.vn </p>
-                                    <p> Website: <a href="http://asianhp.com.vn/"
+                                    <p> Website: <a rel="noopener noreferrer" href="http://asianhp.com.vn/"
                                             target="_blank">asianhp.com.vn</a></p>
                                     <p> Giám đốc công ty: Ông Bùi Thế Lừng - Mail: lungbui@asianjsc.com.vn </p>
                                     <p>Trình độ: Kỹ sư điện</p>
@@ -185,7 +190,7 @@
                                 </ul>
                             </div>
                             <div class="col-lg-6">
-                                <img src="img/anh-họp.jpg" alt="Thông tin 1" class="img-fluid rounded shadow-sm">
+                                <img src="img/anh-họp.jpg" alt="Thông tin 1" class="img-fluid rounded shadow-sm" loading="lazy" decoding="async">
                             </div>
                         </div>
                     </div>
@@ -219,7 +224,7 @@ hàng xuất khẩu – Lisemco.</p>
                             <div class="col-lg-6">
                                 
                                     <img src="img/ảnh họp 4.jpg" alt="Thông tin 2"
-                                    class="img-fluid rounded shadow-sm">
+                                    class="img-fluid rounded shadow-sm" loading="lazy" decoding="async">
                             </div>
                             
                         </div>
@@ -242,7 +247,7 @@ Malaysia nhà máy ô tô Vinfast – Cát Hải, Thành phố Hải phòng.</p>
                             </div>
                             <div class="col-lg-6">
                                 <img src="img/Long Thành - 5.jpg" alt="Thông tin 3"
-                                    class="img-fluid rounded shadow-sm">
+                                    class="img-fluid rounded shadow-sm" loading="lazy" decoding="async">
                             </div>
                         </div>
                     </div>
@@ -345,69 +350,6 @@ Malaysia nhà máy ô tô Vinfast – Cát Hải, Thành phố Hải phòng.</p>
             document.getElementById('lightboxImage').src = imageSrc;
         }
     </script>
-    <script>
-document.addEventListener("DOMContentLoaded", function() {
-    // Chỉ kích hoạt hiệu ứng JS trên màn hình PC (>= 992px)
-    if(window.innerWidth >= 992) {
-        const magicNav = document.querySelector('.magic-nav');
-        const navItems = document.querySelectorAll('.magic-nav .nav-item');
-        const indicator = document.getElementById('navIndicator');
-
-        // LƯU Ý MỚI: Ghi nhớ mục (trang) đang được kích hoạt mặc định ban đầu
-        let defaultActiveItem = document.querySelector('.magic-nav .nav-item.active');
-
-        function moveIndicator(item) {
-            // Lấy vị trí trái và chiều rộng thực tế của thẻ LI đang tương tác
-            const leftPos = item.offsetLeft;
-            const itemWidth = item.offsetWidth;
-            
-            // Ép kích thước cục thanh trượt bằng đúng vị trí đó
-            indicator.style.left = leftPos + 'px';
-            indicator.style.width = itemWidth + 'px';
-
-            // Lấy màu từ biến data-clr để đổi màu Indicator và Glow tự động
-            const clr = item.getAttribute('data-clr');
-            if(clr) {
-                indicator.style.backgroundColor = clr;
-                item.style.setProperty('--clr', clr); 
-            }
-        }
-
-        // 1. SỰ KIỆN KHI DI CHUỘT VÀO TỪNG MỤC (Thay vì click)
-        navItems.forEach(item => {
-            item.addEventListener('mouseenter', function() {
-                navItems.forEach(nav => nav.classList.remove('active'));
-                this.classList.add('active');
-                
-                moveIndicator(this);
-            });
-        });
-
-        // 2. SỰ KIỆN KHI RỜI CHUỘT KHỎI TOÀN BỘ MENU
-        // Tự động trả Indicator về lại trang mặc định ban đầu
-        magicNav.addEventListener('mouseleave', function() {
-            if(defaultActiveItem) {
-                navItems.forEach(nav => nav.classList.remove('active'));
-                defaultActiveItem.classList.add('active');
-                moveIndicator(defaultActiveItem);
-            }
-        });
-
-        // Setup vị trí lúc trang vừa load xong
-        if(defaultActiveItem) {
-            setTimeout(() => moveIndicator(defaultActiveItem), 150); // Chờ xíu để CSS render chuẩn
-        }
-
-        // Setup lại vị trí nếu người dùng resize cửa sổ thu phóng
-        window.addEventListener('resize', () => {
-            if(window.innerWidth >= 992) {
-                const currentActive = document.querySelector('.magic-nav .nav-item.active');
-                if(currentActive) moveIndicator(currentActive);
-            }
-        });
-    }
-});
-</script>
 </body>
 
 </html>
